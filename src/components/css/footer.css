@@ -1,0 +1,58 @@
+.bharat-logo {
+  width: 150px;
+  height: 150px;
+  background-color: white;
+  border-radius: 100%;
+  margin-top: 10px;
+  /* padding:5px */
+}
+.footer-bg {
+  background-color: rgba(216, 216, 216, 0.466);
+  box-shadow: 10px 10px 10px 10px rgb(255, 254, 254);
+}
+.footer-para {
+  font-size: 15px;
+  font-weight: 500;
+  color: #000000;
+}
+.footer-link {
+  /* font-size:15px;*/
+  font-weight: 500;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #000000;
+
+  width: fit-content;
+}
+.footer-link:hover {
+  color: #2f0b5c;
+
+  font-style: italic;
+}
+.footer-line {
+  border-top: solid 1px rgb(5, 5, 5);
+  margin-top: 7px;
+}
+.social-icon {
+  width: 30px;
+  height: 30px;
+}
+.footer-heading {
+  color: #cf0000;
+}
+.social-box {
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 767px) {
+  .social-box {
+    display: block;
+    justify-content: space-between;
+  }
+}
+
+/* .footer-social-icons{
+    display: flex;
+    align-items: center;
+    /* justify-content: space-evenly;
+*/

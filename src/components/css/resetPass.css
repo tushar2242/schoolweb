@@ -1,0 +1,129 @@
+.forget-row {
+  /* background-color: #D9AFD9;
+background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%); */
+  color: black !important;
+  text-align: center;
+  padding: 2em 2em 0.5em;
+  width: 90%;
+  height: 500px;
+  margin: 2em auto;
+
+  border: solid 1.9px #212529a3;
+  border-radius: 5px;
+
+  box-shadow: 0.5rem 1rem rgba(var(--bs-body-color-rgb),.15);
+
+}
+.forget-row img {
+  width: 200px;
+  height: 100px;
+}
+.forget-row h1 {
+  font-size: 2.3em;
+  color: rgba(0, 0, 0, 0.644) !important;
+
+  margin-top: 0px;
+}
+.forget-row .form-group {
+  margin: 0.5em 0;
+}
+.forget-row .form-group label {
+  display: block;
+  color: #fff;
+  text-align: left;
+  font-weight: 600;
+}
+
+.forget-row .form-group input:focus-visible {
+  outline: solid 2px black;
+}
+.forget-row .form-group input,
+.forget-row .form-group button {
+  display: block;
+  padding: 0.5em 0;
+  width: 100%;
+  margin-top: 2.8em;
+  margin-bottom: 0.5em;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid #555;
+  color: black;
+}
+.forget-row .form-group input:focus,
+.forget-row .form-group button:focus {
+  background-color: #ffffffcb;
+  color: #000;
+  border: none;
+  padding: 1em 0.5em;
+  animation: pulse 1s infinite ease;
+}
+.forget-row .form-group button {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  outline: none;
+
+  background-color: #ff4848;
+
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 2em;
+  padding: 1em;
+}
+.forget-row .form-group button:hover,
+.forget-row .form-group button:focus {
+  background-color: #ff4848;
+}
+.forget-row .form-group button.is-loading::after {
+  animation: spinner 500ms infinite linear;
+  content: "";
+  position: absolute;
+  margin-left: 2em;
+  border: 2px solid #000;
+  border-radius: 100%;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  height: 1em;
+  width: 4%;
+}
+.forget-row .footer h5 {
+  margin-top: 1em;
+}
+.forget-row .footer p {
+  margin-top: 2em;
+}
+.forget-row .footer p .symbols {
+  color: #e74c3c;
+}
+.forget-row .footer a {
+  color: inherit;
+  text-decoration: none;
+
+  
+}
+.information-text {
+  color: #e74c3c;
+
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 320px) {
+  .forget-row {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .row h1 {
+    font-size: 1.5em !important;
+  }
+}
+@media screen and (max-width: 450px){
+  .forget-row{
+    height: 530px;
+  }
+}
+@media screen and (min-width: 900px) {
+  .forget-row {
+    width: 50%;
+  }
+}

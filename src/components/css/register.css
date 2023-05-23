@@ -1,0 +1,67 @@
+.register-box {
+    background-color: rgba(232, 229, 248, 0.521);
+    padding: 5px
+}
+
+/* label.label-font{
+    font-size:16px !important;
+    font-weight:600 !important;
+    color:blue !important
+} */
+label {
+    font-size: 15px !important;
+    text-align: left;
+  /* ////  font-weight: 600 !important; */
+    color: #614385 !important;
+    letter-spacing: 0.70px !important;
+}
+
+.submit-btn {
+    width: 100% !important;
+    margin-top: 15px !important;
+    background-color: #614385 !important;
+    color: white !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.borderline {
+    border-bottom: solid 2px #614385;
+    width: 150px
+}
+
+.reg-heading {
+    color: #fb6c1e
+}
+
+.register-box .css-1goxtxt-MuiInputBase-root-MuiFilledInput-root {
+    display: block !important;
+}
+
+.register-box .css-1goxtxt-MuiInputBase-root-MuiFilledInput-root input {
+    margin-top: 20px;
+    width: 100% !important;
+}
+
+.register-box .css-wb57ya-MuiFormControl-root-MuiTextField-root {
+    background-color: #fff;
+}
+
+.register-box .css-wb57ya-MuiFormControl-root-MuiTextField-root label{
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 10px !important;
+}
+
+.register-box .css-l3ln04-MuiAutocomplete-root .MuiAutocomplete-tag{
+    border: solid 1.2px #ff4848;
+
+    color: #614385;
+    background-color: #ff484823;
+
+    margin-top: 20px !important;
+}

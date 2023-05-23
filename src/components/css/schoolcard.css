@@ -1,0 +1,150 @@
+.container-2 {
+  padding-block: 1px;
+  padding-inline: 40px;
+  padding-bottom: 20px;
+
+  background-color: rgba(218, 229, 250, 0.377);
+}
+
+.schoolcard-bg {
+  background-color: rgba(218, 229, 250, 0.377);
+  padding: 50px;
+}
+
+.recm-heading {
+  font-size: 30px;
+  font-weight: 700;
+  color: rgb(27, 27, 27);
+  text-align: center;
+}
+
+.recm-subheading {
+  font-size: 17px;
+  font-weight: 500;
+  color: grey;
+  text-align: center;
+}
+
+.school-title {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: rgb(53, 51, 51) !important;
+  text-align: center;
+  margin-top: 10px ​;
+}
+
+.sl-location {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: rgb(94, 93, 93) !important;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.rev-text {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: rgb(117, 117, 117) !important;
+}
+
+.card-view {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scl-logo-img {
+  width: 250px;
+  height: 150px;
+  margin: auto;
+}
+
+.scl-logo-img:hover {
+  transform: scale(1.04);
+  transition: transform 0.2s;
+}
+
+.card-box {
+  border-radius: 15px !important;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card-box:hover {
+  transform: scale(1.01);
+}
+
+.ad-open {
+  background-color: #614385;
+  color: #ffff;
+  width: 80%;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 10px 10px 0px 0px;
+  margin-top: 20px !important;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.heading-text {
+  color: #ff4848;
+}
+
+@media only screen and (max-width: 767px) {
+  .schoolcard-bg {
+    background-color: rgba(218, 229, 250, 0.377);
+    padding: 10px;
+  }
+
+  .recm-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(27, 27, 27);
+    text-align: center;
+  }
+
+  .recm-subheading {
+    font-size: 13px;
+    font-weight: 500;
+    color: grey;
+    text-align: center;
+  }
+  .react-multi-carousel-item {
+    margin-left: 0px !important;
+  }
+}
+@media only screen and (max-width: 567px) {
+  .container-2 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .container-2 {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+}
+@media only screen and (max-width: 390px) {
+  .container-2 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.react-multi-carousel-list {
+  margin-bottom: 20px;
+}
+
+.react-multi-carousel-item {
+  margin-left: 20px;
+}
+
+.post {
+  height: 450px !important;
+
+  background-color: white;
+}

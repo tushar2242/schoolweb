@@ -1,0 +1,202 @@
+.register-btn {
+  background-color: #ff4848 !important;
+  color: white !important;
+  border-radius: 13px !important;
+  border: solid 1px #ff4848;
+  font-size: 16px;
+  font-weight: 500;
+
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.login-btn {
+  background-color: #614385 !important;
+  color: white !important;
+  border-radius: 13px !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  border: solid 1px #614385 !important;
+
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 60%;
+}
+
+.search-bar input {
+  box-shadow: none;
+}
+
+.search-button {
+  height: 2.5rem !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 7px !important;
+  padding-right: 7px !important;
+  background-color: #614385 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 50%;
+}
+
+.search-button:hover {
+  background-color: #ff4848;
+  cursor: pointer;
+}
+.userIcon:focus-visible {
+  outline: none !important;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+.userIcon svg {
+  font-size: 2.3rem !important;
+
+  margin-left: 15px;
+}
+
+.userIcon div {
+  background-color: white !important;
+}
+
+.userIcon a {
+  color: #614385 !important;
+
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.userIcon a:active {
+  color: #ff4848 !important;
+}
+
+.userIcon div a:hover {
+  background-color: #ff4848;
+  color: white !important;
+}
+.userIcon div a:active {
+  background-color: #ff4848;
+}
+
+.registerLogin {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.NavCenterLine {
+  display: block;
+
+  font-size: 2rem;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler svg {
+  font-size: 2.6rem;
+
+  color: #614385;
+}
+
+.blur-page {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(255 255 255 / 76%);
+  z-index: 200;
+}
+
+@media only screen and (max-width: 767px) {
+  .register-btn {
+    background-color: #ff4848 !important;
+    color: white !important;
+    border-radius: 13px !important;
+    border: solid 1px #ff4848;
+    font-size: 13px;
+    font-weight: 500;
+
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+  }
+
+  .login-btn {
+    background-color: #614385 !important;
+    color: white !important;
+    border-radius: 13px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    border: solid 1px #614385 !important;
+
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: auto;
+  }
+}
+
+.navbar-brand {
+  width: 200px !important;
+  height: 48px !important;
+}
+
+@media only screen and (max-width: 1023px) {
+  .register-btn {
+    background-color: #ff4848 !important;
+    color: white !important;
+    border-radius: 13px !important;
+    border: solid 1px #ff4848;
+    font-size: 13px;
+    font-weight: 500;
+
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+  }
+
+  .login-btn {
+    background-color: #614385 !important;
+    color: white !important;
+    border-radius: 13px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    border: solid 1px #614385 !important;
+
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 13px !important;
+    padding-right: 13px !important;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: auto;
+  }
+}

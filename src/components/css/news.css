@@ -1,0 +1,13 @@
+
+.mySwiper{
+width: 100%;
+}
+
+.swiper-slide{
+    max-width: 350px;
+    width: 100% !important;
+}
+
+.newsImg img{
+    width: 100%;
+}

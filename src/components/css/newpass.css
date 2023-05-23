@@ -1,0 +1,28 @@
+.newPassForm .forget-row {
+  height: 600px;
+  max-width: 500px;
+  width: 100%;
+
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.newPassForm .forget-row h1 {
+  font-size: 2em;
+}
+
+@media screen and (max-width: 450px) {
+  .newPassForm .forget-row {
+    padding: 10px 15px;
+
+    margin-top: 10px;
+  }
+  .newPassForm .forget-row h1 {
+    font-size: 1.5em !important;
+  }
+  .newPassForm .information-text {
+    font-size: 1rem;
+
+    margin-bottom: 10px;
+  }
+}

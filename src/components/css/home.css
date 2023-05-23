@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  /* overflow-x: hidden;/ */
+}
+
+body {
+  color: #00b09b;
+  font-family: "DM Sans", sans-serif;
+
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  /* user-select: none; */
+
+  /* Standard */
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  color: #ff4848 !important;
+}
+
+h1 span {
+  color: #614385;
+}
+[data-theme="dark"] {
+  --font-color: #c1bfbd;
+  --link-color: #0a86da;
+  --link-white-color: #c1bfbd;
+  --bg-color: #333;
+}
+/* navbar css start */
+
+/* .inputBox {
+    max-width: 400px;
+    width: 100%;
+
+    border-bottom: 1.2px solid rgba(0, 0, 0, 0.329);
+}
+
+.navSearch {
+    max-width: 500px;
+    width: 100%;
+} */
+
+/* .searchIcon {
+    right: 40px;
+} */
+
+/* form css :start */
+
+.Loginform {
+  position: absolute;
+  top: 55.7%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  z-index: 500;
+
+  max-width: 700px;
+  width: 100%;
+  height: 520px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse;
+}
+
+.carouselOuter {
+  width: 40%;
+  height: 100%;
+
+  border: solid 0.4px #ff4848;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+
+  border-right: none;
+}
+
+.carouselOuter button {
+  width: 100%;
+
+  color: white;
+  background-color: #614385;
+
+  margin-top: 5px;
+}
+
+.carouselOuter button:nth-child(1) {
+  background-color: #ff4848;
+}
+
+.carouselOuter button:nth-child(2) {
+  margin-top: 5px;
+  background-color: #ff4848;
+}
+
+.formOuter {
+  border: solid 0.4px #ff4848;
+  border-radius: 5px;
+
+  width: 58%;
+  height: 100%;
+
+  background-color: rgb(255, 255, 255);
+  color: #00b09b;
+}
+
+.formOuter label {
+  color: #ff4848;
+}
+
+.txtContainer {
+  padding: 20px;
+}
+
+.LogininputBox {
+  margin-top: 25px !important;
+
+  width: 100%;
+  height: 40px;
+}
+
+.LogininputBox input {
+  width: 100%;
+  height: 10px;
+
+  color: rgb(0, 0, 0);
+}
+
+.forpass {
+  display: inline-block;
+
+  width: 100%;
+  text-align: right;
+}
+
+.forpass p {
+  cursor: pointer;
+}
+
+.loginBtn {
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.loginBtn button {
+  margin-top: 10px;
+
+  background-color: #ff4848;
+}
+.carouselOuter button:hover {
+  background-color: #614385;
+}
+.loginBtn button:nth-child(2) {
+  background-color: #614385;
+}
+.loginBtn button:nth-child(2):hover {
+  background-color: #ff4848;
+}
+form label {
+  top: -5px !important;
+}
+
+.signUpOuter {
+  overflow-y: scroll;
+
+  padding: 8px;
+
+  height: 400px;
+}
+
+.selectInputBox {
+  outline: none;
+  border: 2px solid #614385;
+  border-radius: 5px;
+
+  margin-top: 2px !important;
+  /* background-color: black;
+    color: white; */
+}
+
+/* Designing for scroll-bar */
+::-webkit-scrollbar {
+  width: 2.6px;
+  height: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(255, 255, 255);
+
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #614385;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.css-ke5b6m-MuiButtonBase-root-MuiButton-root:hover {
+  background-color: #614385 !important;
+}
+
+@media only screen and (max-width: 550px) {
+  .carouselOuter,
+  .formOuter {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .carouselOuter {
+    display: none;
+  }
+
+  .Loginform {
+    top: 60%;
+    height: 532px;
+  }
+}

@@ -1,0 +1,99 @@
+.profileOuter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: -moz-fit-content;
+  width: fit-content !important;
+
+  margin: 0px;
+}
+
+.profileOuter .container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+}
+
+.profileOuter .card {
+  /* max-width: 450px;
+  width: 100%; */
+  height: 500px;
+  background-color: #fff;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.profileOuter .card .info {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e1dede;
+  background-color: #e5e5e5;
+
+  margin: 20px;
+}
+
+
+.profileOuter .card .info button {
+  height: 30px;
+  width: 80px;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #000;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.profileOuter .card img{
+  width: 200px;
+  height: 100px;
+
+  margin: 10px auto;
+
+}
+
+.profileOuter .card .forms {
+  padding: 15px;
+
+  overflow-y: auto;
+}
+
+.profileOuter .card .inputs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.profileOuter .card .inputs span {
+  font-size: 12px;
+}
+
+.profileOuter .card .inputs input {
+  height: 40px;
+  padding: 10px 10px;
+  font-size: 17px;
+  box-shadow: none;
+  outline: none;
+
+  max-width: 370px;
+}
+
+.profileImgInput{
+  width: 60%;
+  height: 40px !important;
+
+  padding: 0px !important;
+  margin: 10px;
+}
+
+.profileOuter .card .inputs input[type="text"][readonly] {
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+
+.editInput {
+  border: solid 1.2px black;
+}

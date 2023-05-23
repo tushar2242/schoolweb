@@ -1,0 +1,271 @@
+.school-image {
+    width: 150px;
+    height: 150px;
+    background-color: #ffff;
+    border-radius: 20px;
+}
+
+.enquire-btn {
+    padding-left: 70px !important;
+    padding-right: 70px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    border-radius: 15px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+.schoollogoImg {
+    width: 150px;
+    height: 150px
+}
+
+.compare-btn {
+    padding-left: 70px !important;
+    padding-right: 70px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    border-radius: 15px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+.locate-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: grey;
+    letter-spacing: 0.75px;
+}
+
+.schoolHeading {
+    font-size: 25px;
+    font-weight: 500;
+    color: rgb(31, 30, 30);
+    letter-spacing: 0.75px;
+}
+
+.tagline {
+    border-bottom: solid 2px blueviolet;
+    width: 75%;
+    margin-top: 10px
+}
+
+.day-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(46, 46, 46)
+}
+
+.time-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(143, 142, 142)
+}
+
+.timeline {
+    border-bottom: solid 1px rgb(211, 208, 208);
+    margin-top: -10px
+}
+
+.class-type {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(37, 37, 37);
+    background-color: white;
+    border-radius: 15px;
+    border: solid 0.50px rgb(223, 220, 220);
+    padding: 5px;
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 5px
+}
+
+.class-type:hover {
+    background-color: blue;
+    color: white
+}
+
+.standared-type {
+    display: flex;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+    background-color: white;
+    margin-top: 20px;
+    /* overflow-x: auto; */
+}
+
+.standared-type::-webkit-scrollbar{
+    width: 0px;
+    height: 3px;
+}
+
+.hour-box {
+    background-color: white;
+    padding: 35px
+}
+
+.schoolcard-box {
+    border-radius: 0px;
+    margin-bottom: 20px;
+    border: none;
+    padding: 25px;
+    background-color: #ffffff
+}
+
+.button-box {
+    display: flex;
+    /* justify-content: space-between; */
+
+}
+
+.button-box p{
+    width: 100px;
+}
+
+.study-box {
+    background-color: rgba(232, 229, 248, 0.521);
+    padding: 10px
+}
+
+.faclity-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px
+}
+
+@media screen and (max-width:767px) {
+    .faclity-box {
+        display: block;
+        justify-content: space-between;
+        margin-top: 10px
+    }
+
+    .schoolcard-box {
+        border-radius: 0px;
+        margin-bottom: 20px;
+        border: none;
+        padding: 10px;
+        background-color: white
+    }
+
+    .enquire-btn {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        border-radius: 15px !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+    }
+
+    .compare-btn {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        border-radius: 15px !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+    }
+
+    .schoolHeading {
+        font-size: 18px;
+        font-weight: 700;
+        color: rgb(31, 30, 30);
+        letter-spacing: 0.75px;
+    }
+
+    .standared-type {
+        display: flex;
+        padding-top: 15px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        background-color: white;
+        overflow-x: auto;
+    }
+
+    .hour-box {
+        background-color: white;
+        padding: 10px
+    }
+
+    .class-type {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgb(37, 37, 37);
+        background-color: white;
+        border-radius: 15px;
+        border: solid 0.50px rgb(223, 220, 220);
+        padding: 5px;
+        width: 60px;
+        text-align: center;
+        cursor: pointer;
+        margin-left: 5px
+    }
+
+    .study-box {
+        background-color: rgba(232, 229, 248, 0.521);
+        padding: 0px
+    }
+}
+
+@media screen and (max-width:1023px) {
+    .enquire-btn {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        border-radius: 15px !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+    }
+
+    .compare-btn {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        border-radius: 15px !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+    }
+
+    .schoollogoImg {
+        width: 100px;
+        height: 100px
+    }
+
+    .hour-box {
+        background-color: white;
+        padding: 10px
+    }
+
+    .standared-type {
+        display: flex;
+        padding-top: 15px;
+        padding-bottom: 0px;
+        background-color: white;
+        overflow-x: auto;
+    }
+
+    .study-box {
+        background-color: rgba(232, 229, 248, 0.521);
+        padding: 5px
+    }
+}
+
+.css-jue3ft-MuiRating-root label{
+    font-size: 2.3rem !important;
+
+    color: #ff4848 !important;
+}
+
+@media (max-width:780px){
+    .button-box p{
+       font-size: 13px;
+    }
+}
