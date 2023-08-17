@@ -254,7 +254,7 @@ const FormContainer = (props) => {
 
             <br />
             <div className="forpass">
-              New to CollegeDekho?
+              New to BharatSchool?
               <p className="p-1" onClick={setShowFunction}>
                 Signup
               </p>

@@ -34,6 +34,13 @@
     display:flex;
     justify-content: space-between;
 }
+.comment-box p:hover{
+    color: #FF4848;
+}
+.comment-box p{
+    cursor: pointer;
+}
+
 .recent-post-img{
     width:120px;
     height:120px

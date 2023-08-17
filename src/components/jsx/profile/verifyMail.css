@@ -1,0 +1,44 @@
+.verify-outer {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.753);
+    position: absolute;
+    top: 0px;
+    z-index: 1000;
+}
+
+.form-box-ht {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgb(231, 230, 230);
+    position: relative;
+    background-color: white;
+    z-index: 20000;
+}
+
+.form-bx-int {
+    border-bottom: solid 1px grey;
+    border-radius: 0px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+
+}
+
+.fm-sub-btn {
+    margin-top: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border: none;
+    background-color: rgb(4, 119, 165);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    width: 100%;
+}

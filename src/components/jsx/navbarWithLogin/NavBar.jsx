@@ -206,6 +206,10 @@ const NavBar = () => {
                     handleLogindisplay={hideLogin}
                 />
             }
+
+
+
+
         </>
     )
 }
@@ -216,3 +220,6 @@ export default NavBar;
 
 
 // In navigation we use redux for login popup in update for centralize state variable with navbar component
+
+
+

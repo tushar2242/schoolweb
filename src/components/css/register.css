@@ -28,6 +28,10 @@ label {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
 }
+.review .submit-btn{
+    max-width: 400px;
+    margin-left: 13px;
+}
 
 .borderline {
     border-bottom: solid 2px #614385;

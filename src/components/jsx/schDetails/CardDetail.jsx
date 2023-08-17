@@ -34,6 +34,7 @@ import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
 import noImg from '../../images/noImg.jpg';
 import showSchoolPreview from '../../images/banner/schoolDefault.jpg'
+import Review from "./Review";
 
 const customIcons = {
   1: <FrownOutlined />,
@@ -679,13 +680,12 @@ const ReviewForm = () => {
       setRatingMsg('')
     }
 
-
   }
 
 
   return (
     <>
-      <div>
+      <div className="p-4 review">
         <h2>Drop a review</h2>
         <p className="borderline"></p>
         <Stack spacing={1}>
@@ -753,10 +753,13 @@ const ReviewForm = () => {
             variant="contained"
             className="submit-btn"
             onClick={handleReviewSubmit}
+            style={{width:'50px !important'}}
           >
             DROP YOUR REVIEW
           </Button>
         </div>
+
+        <Review />
       </div>
     </>
   );

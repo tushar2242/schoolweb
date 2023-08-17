@@ -3,6 +3,7 @@ import { TextField, Button } from "@mui/material";
 // import MenuItem from '@mui/material/MenuItem';
 import ClearIcon from "@mui/icons-material/Clear";
 //import moment from 'moment';
+import LoadingPage from "../loader/LoadingPage";
 import axios from "axios";
 
 // import { formik } from 'formik';
@@ -92,16 +93,32 @@ export default class SignUp extends React.Component {
       isSubmit: true,
       isOtp: false,
       otp: '',
+      userId: '',
 
       isLoading: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.componentDidMount = this.componentDidMount(this);
+    this.sendMail = this.sendMail.bind(this);
+    this.handleOTP = this.handleOTP.bind(this)
   }
 
   componentDidMount() {
     document.body.style.backgroundAttachment = "fixed !important";
+  }
+
+
+  async sendMail(id) {
+    try {
+      const mailRes = await axios.post(`${url}mail/send/ForOtp?userId=${id}`, {
+        "email": this.state.email
+      })
+      console.log(mailRes)
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
 
   handleSubmit(e) {
@@ -124,19 +141,26 @@ export default class SignUp extends React.Component {
       })
       .then((res) => {
         console.log(res)
-        localStorage.setItem("accessToken", res.data.data.token);
+        // localStorage.setItem("accessToken", res.data.data.token);
         localStorage.setItem("userId", res.data.data._id);
 
-        alert(res.data.msg);
-        window.location.reload();
+        console.log(res.data)
+
+        this.sendMail(res.data.data._id)
+        this.setState({ userId: res.data.data._id })
+
         this.setState({ isLoading: false });
+        this.handleSign()
       })
+
+
       .catch((err) => {
-        alert(err.msg);
+        alert(err);
         if (err.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           console.log(err.response.data);
+          alert(err.response.data.message)
           console.log(err.response.status);
           console.log(err.response.headers);
         } else if (err.request) {
@@ -152,10 +176,32 @@ export default class SignUp extends React.Component {
       });
   }
 
-  handleSign(e) {
-
+  handleSign() {
     this.setState({ isOtp: true })
   }
+
+
+
+  async handleOTP() {
+    const id = await this.state.userId;
+    try {
+      const otpRes = await axios.post(`${url}otp/verify?userId=${id}`, {
+        "otp": this.state.otp
+      });
+
+      console.log(otpRes.data)
+    }
+    catch (err) {
+      console.log(err.data)
+    }
+  }
+
+
+
+
+
+
+
   render() {
     const {
       name,
@@ -178,10 +224,19 @@ export default class SignUp extends React.Component {
     const { hideSignUp, setLogin, handleLogindisplay } = this.props;
     // const formattedDob = moment(dob).format('yyyy-MM-dd');
     // console.log(formattedDob)
+
+
+
+
+
+
+
+
+
     return (
       <>
 
-
+        {isLoading && <LoadingPage msg="Sign Up.." />}
 
         <div className="formOuter">
           <center>
@@ -251,13 +306,13 @@ export default class SignUp extends React.Component {
                     onChange={(e) => {
                       this.setState({ email: e.target.value, isSubmit: false });
                       // console.log(e.target.value);
-                      let emailCheck =
-                        /^[A-Za-z_0-9]{2,}@[A-Za-z]{2,}[.]{1}[A-Za-z.]{1,6}$/gms;
-                      if (!emailCheck.test(e.target.value)) {
-                        this.setState({ emailError: "block", isSubmit: false });
-                      } else {
-                        this.setState({ emailError: "none" });
-                      }
+                      // let emailCheck =
+                      //   /^[A-Za-z_0-9]{2,}@[A-Za-z]{2,}[.]{1}[A-Za-z.][.]{1,6}$/gms;
+                      // if (!emailCheck.test(e.target.value)) {
+                      //   this.setState({ emailError: "block", isSubmit: false });
+                      // } else {
+                      //   this.setState({ emailError: "none" });
+                      // }
                     }}
                   />
                   <label className="error" style={{ display: emailError }}>
@@ -379,8 +434,8 @@ export default class SignUp extends React.Component {
                   <br />
 
                   <div className="loginBtn">
-                    <Button variant="contained" color="success" onClick={() => {
-                      this.handleSign()
+                    <Button variant="contained" color="success" onClick={(e) => {
+                      this.handleSubmit(e)
                     }} >
                       Sign Up
                     </Button>
@@ -396,7 +451,7 @@ export default class SignUp extends React.Component {
                 :
                 <>
 
-
+                  <h5>Sent Otp to :- {email}</h5>
                   <TextField
                     value={otp}
                     label="OTP"
@@ -407,14 +462,15 @@ export default class SignUp extends React.Component {
                     required
                     onChange={(e) => {
                       this.setState({ otp: e.target.value });
+
                     }}
                   />
 
                   <br />
 
                   <div className="loginBtn">
-                    <Button variant="contained" color="warning" onClick={() => this.handleSubmit()}>
-                      Submit Otp
+                    <Button variant="contained" color="warning" onClick={() => this.handleOTP()}>
+                      Finish Sign Up
                     </Button>
                   </div>
                   <div className="forpass mt-3">

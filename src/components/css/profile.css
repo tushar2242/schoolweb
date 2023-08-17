@@ -9,6 +9,26 @@
   margin: 0px;
 }
 
+.verify-email{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.verify-email span{
+  background-color: aquamarine;
+  cursor: pointer;
+  margin-right: 10px;
+
+  text-transform: capitalize;
+}
+
+
+
+
+
+
+
 .profileOuter .container {
   height: 100vh;
   display: flex;
