@@ -69,7 +69,8 @@ const Login = (props) => {
         setIsToast("success");
         localStorage.setItem("accessToken", res.data.data.token);
         localStorage.setItem("userId", res.data.data._id);
-        window.location.reload();
+        window.location.reload()
+        console.log(res.data);
       })
       .catch((res) => {
         // alert(res.response.data.msg)
@@ -198,7 +199,7 @@ const FormContainer = (props) => {
           <div className="txtContainer">
             <h4>Welcome Back</h4>
             <p>Sign in to Continue</p>
-            { (
+            {(
               <div className="clearIcon" onClick={handleLogindisplay} >
                 <ClearIcon />
               </div>
@@ -245,9 +246,9 @@ const FormContainer = (props) => {
                 <Button variant="contained" color="success" type="submit">
                   Login
                 </Button>
-                <Button variant="contained" color="primary">
+                {/* <Button variant="contained" color="primary">
                   Login with OTP
-                </Button>
+                </Button> */}
               </div>
             </form>
 

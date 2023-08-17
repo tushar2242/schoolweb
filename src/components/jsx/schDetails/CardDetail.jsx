@@ -33,6 +33,7 @@ import { Skeleton } from "antd";
 import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
 import noImg from '../../images/noImg.jpg';
+import showSchoolPreview from '../../images/banner/schoolDefault.jpg'
 
 const customIcons = {
   1: <FrownOutlined />,
@@ -48,6 +49,7 @@ const ratingPostEndPoint = "rating/create";
 const url = `https://hammerhead-app-iohau.ondigitalocean.app/`;
 
 const postId = localStorage.getItem("postId");
+const userId = localStorage.getItem("userId");
 
 
 
@@ -76,31 +78,25 @@ const Details = () => {
         if (id !== 'None') {
           const response = await axios.get(`${url}${endPoint}${id}`);
 
-          if (response.data.data[0].profilePic.length !== 0) {
-            const tempDp = response.data.data[0].profilePic[0].image;
+          if (!response.data.data[0].school.schoolImage) {
+            setDp(showSchoolPreview);
+          }
+          else {
+            const tempDp = response.data.data[0].school.schoolImage;
             const mainDp = `${url}${tempDp}`;
             setDp(mainDp);
           }
-          else {
-            setDp(noImg);
-          }
-
           setCard(response.data.data[0]);
-          // console.log(card);
-          // console.log('none')
-
         } else {
-          // console.log('fired')
           const response = await axios.get(`${url}${endPoint}${postId}`);
-          if (response.data.data[0].profilePic.length !== 0) {
-            const tempDp = response.data.data[0].profilePic[0].image;
+          if (!response.data.data[0].school.schoolImage) {
+            setDp(showSchoolPreview);
+          }
+          else {
+            const tempDp = response.data.data[0].school.schoolImage;
             const mainDp = `${url}${tempDp}`;
             setDp(mainDp);
           }
-          else {
-            setDp(noImg);
-          }
-
           setCard(response.data.data[0]);
         }
       } catch (error) {
@@ -110,7 +106,6 @@ const Details = () => {
 
     fetchData();
   }, [id]);
-
 
 
 
@@ -330,6 +325,7 @@ class OpeningHour extends React.Component {
     );
   }
 }
+
 class Standard extends React.Component {
   render() {
     return (
@@ -599,7 +595,7 @@ class GalleryModal extends React.Component {
     const { closeModal, hasNext, hasPrev, findNext, findPrev, src } =
       this.props;
     if (!src) {
-      console.log(src);
+      // console.log(src);
       return null;
     }
     return (
@@ -649,21 +645,43 @@ const ReviewForm = () => {
   const [ratingMail, setRatingMail] = useState("");
   const [ratingMsg, setRatingMsg] = useState("");
 
-  const handleReviewSubmit = (e) => {
+  const handleReviewSubmit = async (e) => {
+
     e.preventDefault();
-    axios.post(`${url}${ratingPostEndPoint}`, {
-      schoolId: postId,
-      name: ratingName,
-      email: ratingMail,
-      text: ratingMsg,
-    })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch(res => {
-        console.log(res)
-      })
-  };
+    if (userId) {
+      try {
+        const res = await axios.post(`${url}${ratingPostEndPoint}?userId=${userId}`, {
+          schoolId: postId,
+          name: ratingName,
+          email: ratingMail,
+          text: ratingMsg,
+          rating: star
+        })
+
+        console.log(res.data)
+        alert(res.data.msg)
+      }
+      catch (err) {
+        console.log(err)
+        setStar(3)
+        setRatingMail('')
+        setRatingMail('')
+        setRatingMsg('')
+        alert(err.response.data.msg)
+      }
+    }
+
+    else {
+      alert("Please Login Before Review")
+      setStar(3)
+      setRatingName('')
+      setRatingMail('')
+      setRatingMsg('')
+    }
+
+
+  }
+
 
   return (
     <>

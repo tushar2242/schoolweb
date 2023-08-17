@@ -11,6 +11,7 @@ import twitter from '../../images/social-icon/twitter.png';
 import linkedin from '../../images/social-icon/linkedin.png';
 import youtube from '../../images/social-icon/youtube.png';
 
+// import AboutUs from '../aboutUs/AboutUs';
 
 export default class Footer extends React.Component {
 
@@ -39,9 +40,10 @@ class FooterCode extends React.Component {
                                 <h5 className="footer-heading"><b>Information</b></h5>
                                 <p className="borderline"></p>
                                 <ul className="nav flex-column mt-4">
-                                    <li><NavLink to="/" className="nav-link p-0 footer-link"><ArrowRightAltSharpIcon></ArrowRightAltSharpIcon> About Us</NavLink></li>
-                                    <li><NavLink to="/" className="nav-link p-0 footer-link"><ArrowRightAltSharpIcon></ArrowRightAltSharpIcon> Terms & Conditions</NavLink></li>
-                                    <li><NavLink to="/" className="nav-link p-0 footer-link"><ArrowRightAltSharpIcon></ArrowRightAltSharpIcon> Privacy Policy</NavLink></li>
+                                    <li><NavLink to="/aboutus" className="nav-link p-0 footer-link"><ArrowRightAltSharpIcon></ArrowRightAltSharpIcon> About Us</NavLink></li>
+                                    <li><NavLink to="/terms" className="nav-link p-0 footer-link"><ArrowRightAltSharpIcon></ArrowRightAltSharpIcon> Terms & Conditions</NavLink></li>
+                                    <li><NavLink to="/Privacypolicy" className="nav-link p-0 footer-link"><ArrowRightAltSharpIcon></ArrowRightAltSharpIcon> Privacy Policy</NavLink></li>
+
                                     <li><NavLink to="/" className="nav-link p-0 footer-link"><ArrowRightAltSharpIcon></ArrowRightAltSharpIcon> Contact Us</NavLink></li>
                                     <li><NavLink to="/" className="nav-link p-0 footer-link"><ArrowRightAltSharpIcon></ArrowRightAltSharpIcon> Sitemap</NavLink></li>
                                 </ul>
@@ -61,7 +63,9 @@ class FooterCode extends React.Component {
                                 <h5 className="footer-heading"><b>Contact Us</b></h5>
                                 <p className="borderline"></p>
                                 <ul className="nav flex-column mt-4">
-                                    <li><NavLink to="/" className="nav-link p-0 footer-link"><LocationOnSharpIcon className="fs-5"></LocationOnSharpIcon> Sati Plaza, Barrackpore,Kolkata - 120</NavLink></li>
+                                    <li><NavLink to="/" className="nav-link p-0 footer-link"><LocationOnSharpIcon className="fs-5"></LocationOnSharpIcon>210 ,Built-up :32.42
+                                        Square Meter, 2nd floor, I Think Tower B, Kalyan
+                                        Shil road, Near Xperia Mall Dombivali East, Mumbai 421204</NavLink></li>
                                     <li><NavLink to="/" className="nav-link p-0 footer-link"><EmailSharpIcon className="fs-5"></EmailSharpIcon> support@schooldekho.org <br></br> info@schooldekho.org</NavLink></li>
                                     <li><NavLink to="/" className="nav-link p-0 footer-link"><LocalPhoneSharpIcon className="fs-5"></LocalPhoneSharpIcon> 1800 - 2588 - 074</NavLink></li>
                                 </ul>

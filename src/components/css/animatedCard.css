@@ -70,12 +70,14 @@
 
 .post-module .thumbnail img {
   display: block;
-  width: 120%;
+  /* width: 120%; */
   -webkit-transition: all 0.3s linear 0s;
   -moz-transition: all 0.3s linear 0s;
   -ms-transition: all 0.3s linear 0s;
   -o-transition: all 0.3s linear 0s;
   transition: all 0.3s linear 0s;
+  width: 300px;
+  height: 270px;
 }
 
 .post-module .post-content {
@@ -255,4 +257,7 @@
 .card-body {
   padding-top: 0px;
   padding-bottom: 0px;
+}
+@media only screen and (max-width: 700px) {
+
 }

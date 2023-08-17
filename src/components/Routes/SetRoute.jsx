@@ -17,8 +17,9 @@ import NewPassWord from "../jsx/passWordReset/NewPassWord";
 // import { AnimationUsingaos } from "../jsx/react-spring/animationUsingaos";
 import { Helmet } from "react-helmet";
 import schIcon from '../images/logo2.png';
-
-
+import AboutSchool from '../jsx/aboutUs/AboutSchool'
+import Terms from '../jsx/privacy-policy/Terms'
+import PrivacyPolicy from '../jsx/privacy-policy/PrivacyPolicy'
 const SetRoute = () => {
   return (
     <>
@@ -33,7 +34,9 @@ const SetRoute = () => {
           <Route path="/showSchool" element={<CardDetail />} />
           <Route path="/search" element={<Search />} />
           <Route path="/card" element={<SchoolCardCarousel />} />
-
+          <Route path="/aboutus" element={<AboutSchool />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
           <Route path="/enquiry" element={<Enquiry />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/articleDetails" element={<ArticleDetail />} />

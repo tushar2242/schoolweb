@@ -67,7 +67,7 @@ const SchoolCounter = ({ title, count }) => {
         onChange={onVisibilityChange}
         active={!isVisible} // Ensure the sensor is active when isVisible is false
       >
-        <div className="d-flex">
+        <div className="d-flex" style={{justifyContent:'center'}}>
           <img src={schoolicon} alt="icon" className="school-icon" />
           <div>
             {isVisible ? (

@@ -13,8 +13,8 @@ export default class RegisterBanner extends React.Component {
                         <h1>Add Your School with us</h1>
                         <div className="bannerInputBox">
                             {userId ? <NavLink to="/register" className="bannerBtn">Register Your School </NavLink>
-                                :
-                                <NavLink to="/" className="bannerBtn">Please Login</NavLink>
+                                :null
+                                // <NavLink to="/" className="bannerBtn">Please Login</NavLink>
                             }
                         </div>
                     </div>

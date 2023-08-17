@@ -9,20 +9,6 @@ import AOS from 'aos';
 const endPoint = "about/us/get";
 const url = `https://hammerhead-app-iohau.ondigitalocean.app/`;
 
-// const getDirection = (index) => {
-//   switch (index) {
-//     case 0:
-//       return 'fade-left';
-//     case 1:
-//       return 'fade-right';
-//     case 2:
-//       return 'fade-left';
-//     default:
-//       return 'fade-right';
-//   }
-// }
-
-
 
 export default class AboutSchool extends React.Component {
   constructor(props) {
@@ -39,7 +25,7 @@ export default class AboutSchool extends React.Component {
     axios
       .get(`${url}${endPoint}`)
       .then((res) => {
-        // console.log(res.data.data);
+        console.log(res.data.data);
         this.setState({
           aboutData: res.data.data[0],
           isDataLoad: true,
@@ -111,10 +97,10 @@ class StudentCard extends React.Component {
         <div className="col-md-6 mt-3" data-aos={direction}>
           <div className="center">
             <div className="article-card">
-              <div className="content">
+              {/* <div className="content">
                 <p className="date">Jan 1, 2022</p>
                 <p className="title">Article Title Goes Here</p>
-              </div>
+              </div> */}
               <img src={imgPath} alt="article-cover" />
             </div>
           </div>

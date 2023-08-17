@@ -99,7 +99,7 @@ const NavBar = () => {
 
     function handleLogOut() {
         setLoading(true)
-        axios.post(`34.29.141.94/user/logout-api`)
+        axios.post(`https://hammerhead-app-iohau.ondigitalocean.app/user/logout-api`)
             .then(res => {
                 console.log(res)
             })

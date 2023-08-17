@@ -9,8 +9,6 @@ import SetRoute from "./components/Routes/SetRoute";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
       <SetRoute />
-    </React.StrictMode>
   </BrowserRouter>
 );

@@ -1,8 +1,12 @@
+/* eslint-disable react/prop-types */
 // import { useState, useEffect } from 'react';
 import schoollogo from '../../images/logo1.png';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import GradeIcon from '@mui/icons-material/Grade';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addId } from '../../redux/post/postSlice';
 // import SimpleLoader from '../loader/SimpleLoader';
 
 
@@ -14,13 +18,19 @@ const FilterschoolBox = (props) => {
     // useEffect(() => {
     //     setIsLoading(false);
     // }, [])
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     const { schData } = props;
     return (
         <>
             {
-                <div className="filter-card-box shadow-sm mt-3 mb-3 ">
+                <div className="filter-card-box shadow-sm mt-3 mb-3 " style={{ cursor: 'pointer' }} onClick={async () => {
+                    await dispatch(addId(schData._id));
+                    await localStorage.setItem("postId", schData._id);
+                    navigate('/showSchool')
+                }}>
                     <div className="row">
                         <div className="col-md-3 text-center mt-2">
                             <img src={schoollogo} alt="logo" className="school-logo-img" />

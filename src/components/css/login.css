@@ -224,4 +224,7 @@
   .outer-message .toast__content{
     padding-right: 5px;
   }
+  .clearIcon{
+    right: 40px!important;
+  }
 }

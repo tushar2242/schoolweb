@@ -39,6 +39,7 @@ export default class ArticleDetail extends React.Component {
           <div className="row">
             <div className="col-md-8">
               <BlogDetails />
+              <Comments />
             </div>
             <div className="col-md-4">
               <Category />
@@ -165,3 +166,11 @@ class StayConnect extends React.Component {
   }
 }
 
+
+
+const Comment = () => {
+  return (
+    <>
+    </>
+  )
+}

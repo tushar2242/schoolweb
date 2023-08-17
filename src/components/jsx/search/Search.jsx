@@ -1,5 +1,4 @@
-
-
+/* eslint-disable react/prop-types */
 import Checkbox from '@mui/material/Checkbox';
 import StarIcon from '@mui/icons-material/Star';
 
@@ -11,12 +10,14 @@ import axios from 'axios';
 
 import React, { useEffect, useState } from 'react';
 import FilterschoolBox from './FilterschoolBox';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addSchool } from '../../redux/post/postSlice';
 
 import SimpleLoader from '../loader/SimpleLoader';
 
 
 const endPoint = "school/find-to/filter";
+const filterEndPoint = 'school/filter';
 const url = `https://hammerhead-app-iohau.ondigitalocean.app/`;
 
 
@@ -26,28 +27,33 @@ const url = `https://hammerhead-app-iohau.ondigitalocean.app/`;
 const Search = () => {
 
     const [searchQuery, setSearchQuery] = useState('');
-    const [school, setSchool] = useState([]);
+    // const [school, setSchool] = useState([]);
 
 
     const searchValue = useSelector((state) => state.post.search)
     const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch()
+    const schools = useSelector((sch) => sch.post.schools)
 
     // setSearchQuery(searchValue);
 
 
-    useEffect(() => {
-        setSearchQuery(searchValue)
-    }, [searchValue])
+    // useEffect(() => {
+    //     setSearchQuery(searchValue)
+    // }, [searchValue])
 
     useEffect(() => {
         // console.log('log')
+        setSearchQuery(searchValue)
         async function fetData() {
 
             try {
                 const encodedQuery = encodeURIComponent(searchQuery);
                 //  console.log(`${url}school?search=${encodedQuery}`);
                 const result = await axios.get(`${url}school?search=${encodedQuery}`)
-                setSchool(result.data.data)
+
+                dispatch(addSchool(result.data.data))
+                //setSchool(result.data.data)
                 setIsLoading(false)
 
             } catch (error) {
@@ -57,10 +63,10 @@ const Search = () => {
         }
 
         fetData()
-
+        window.scroll(0, 0)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searchQuery])
+    }, [searchQuery, searchValue])
 
 
 
@@ -81,7 +87,7 @@ const Search = () => {
 
                             {
                                 isLoading ? <SimpleLoader /> :
-                                    school.length > 0 && school.map(schData => {
+                                    schools.length > 0 && schools.map(schData => {
                                         // console.log(schData)
                                         return <FilterschoolBox schData={schData} key={schData._id} />
                                     })
@@ -91,14 +97,13 @@ const Search = () => {
                     </div>
                 </div>
             </div>
+
             {/* -----------------------------------For Tablet and Mobile View----------------------------------------------------------- */}
             <div className="tablet-vw-filter" style={{ position: 'relative', top: '20px' }}>
                 <div className="container">
-                    <FilterByBMR>
-
-                    </FilterByBMR>
+                    <FilterByBMR schData={schools} />
                     {
-                        isLoading ? <SimpleLoader /> : school.length > 0 && school.map(schData => {
+                        isLoading ? <SimpleLoader /> : schools.length > 0 && schools.map(schData => {
                             // console.log(schData)
                             return <FilterschoolBox
                                 schData={schData}
@@ -182,10 +187,13 @@ const SchoolBoard = (props) => {
     const handleCheckboxChange = (e, val) => {
         e.preventDefault()
         // Perform actions when checkbox is checked or unchecked
-        setIsChecked(!isChecked);
         if (!isChecked) {
-            handleClick(val)
+            handleClick(val, true)
         }
+        else {
+            handleClick(val, false)
+        }
+        setIsChecked(!isChecked)
     };
 
     return (
@@ -272,18 +280,41 @@ class SchoolRating extends React.Component {
 
 function FilterByBMR() {
     const [filterValue, setFilterValue] = useState('');
+    const [fData, setFData] = useState('')
+
+    useEffect(() => {
+        axios.get(`${url}${endPoint}`)
+            .then((res) => {
+                // console.log(res.data.data)
+                setFData(res.data.data)
+                // setFilterData(res.data.data)
+
+            })
+            .catch(res => {
+                console.log(res)
+            })
+    }, [])
 
     let filterData;
 
     switch (filterValue) {
         case 'Board':
-            filterData = <FilterByBoard />;
+            filterData = <FilterByBoard
+                filterData={fData[0]}
+                title='FILTER BY BOARD'
+            />;
             break;
         case 'Medium':
-            filterData = <FilterByMedium />;
+            filterData = <FilterByBoard
+                filterData={fData[1]}
+                title='FILTER BY Medium'
+            />;
+            break;
+        case 'Rating':
+            filterData = <FilterByRating />;
             break;
         default:
-            filterData = <FilterByRating />;
+            filterData = null;
             break;
     }
     return (
@@ -324,6 +355,7 @@ function FilterByBMR() {
 //         </>
 //     );
 // }
+
 function FilterByRating(props) {
     return (
         <>
@@ -338,21 +370,57 @@ function FilterByRating(props) {
         </>
     );
 }
+
+
 function FilterByBoard(props) {
     const { filterData, title } = props;
-    const [filterValue, setFilterValue] = useState('')
+    const [filterValue, setFilterValue] = useState([]);
 
-    async function handleClick(val) {
+    const dispatch = useDispatch()
 
-        await setFilterValue(
-            (prevState) => {
-                return {
-                    ...prevState,
-                    ...val
-                }
-            }
-        );
-        console.log(filterValue)
+
+    async function fetchSchValue(fillValue) {
+        const encodeFilterValue = encodeURIComponent(fillValue)
+
+        try {
+            // console.log(`${url}school?search=${encodeFilterValue}`)
+            const result = await axios.get(`${url}${filterEndPoint}?search=${encodeFilterValue}`)
+            // console.log(result.data.data)
+            const filterSchValue = result.data.data
+            return filterSchValue
+        }
+        catch (err) {
+            alert(err.response.data.msg)
+            return null
+        }
+
+
+    }
+
+    async function handleClick(val, con) {
+        if (con) {
+            filterValue.push(val)
+
+            let fillValue = filterValue.join(',')
+            console.log(fillValue)
+            const filterSchList = await fetchSchValue(fillValue)
+            filterSchList !== null ?
+                dispatch(addSchool(filterSchList))
+                : null
+        }
+        else {
+            // console.log('fired',val)
+            setFilterValue(
+                (prevFilter) =>
+                    prevFilter = prevFilter.filter(fName => fName !== val)
+            )
+            let fillValue = await filterValue.filter(fName => fName !== val).join(',')
+            const filterSchList = await fetchSchValue(fillValue)
+            filterSchList !== null ?
+                dispatch(addSchool(filterSchList))
+                : null
+        }
+        // await console.log(filterValue)
 
     }
     return (
@@ -377,4 +445,4 @@ function FilterByBoard(props) {
 
 
 
-export default Search
+export default Search;

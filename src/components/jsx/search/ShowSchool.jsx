@@ -66,6 +66,7 @@ export default class details extends React.Component {
 }
 
 
+
 class Carddetails extends React.Component {
     render() {
         return (
@@ -111,6 +112,7 @@ class Carddetails extends React.Component {
     }
 }
 
+
 class OpeningHour extends React.Component {
     render() {
         return (
@@ -125,6 +127,8 @@ class OpeningHour extends React.Component {
         )
     }
 }
+
+
 class Standard extends React.Component {
     render() {
         return (
@@ -136,6 +140,7 @@ class Standard extends React.Component {
         )
     }
 }
+
 
 class Facility extends React.Component {
     render() {

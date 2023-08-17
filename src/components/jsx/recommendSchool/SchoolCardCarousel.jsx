@@ -4,19 +4,20 @@ import schoollogo from "../../images/logo1.png";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import StarIcon from "@mui/icons-material/Star";
+// import StarIcon from "@mui/icons-material/Star";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { addId } from "../../redux/post/postSlice";
 import { useSelector } from "react-redux";
 import CompTitle from "../componentTitle/CompTitle";
-import LeftOutlined from '@mui/icons-material/ArrowBackIosNew';
-import RightOutlined from '@mui/icons-material/ArrowForwardIos';
+// import LeftOutlined from '@mui/icons-material/ArrowBackIosNew';
+// import RightOutlined from '@mui/icons-material/ArrowForwardIos';
 // import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye'; 
 import GradeIcon from '@mui/icons-material/Grade';
+import schoolDefaultLogo from '../../images/show_school_Preview.png'
 
 
 
@@ -60,8 +61,8 @@ const responsive = {
 const SchoolCard = () => {
   const [data, setData] = useState([]);
 
-  const id = useSelector((state) => state.post.id);
-  console.log(id);
+  //  / const id = useSelector((state) => state.post.id);
+  // console.log(id);
 
   useEffect(() => {
     setSchoolData();
@@ -71,10 +72,10 @@ const SchoolCard = () => {
     axios
       .get(`${url}${endPoint}`)
       .then((res) => {
-        // console.log(res.data.data, "this carousel");/
+        console.log("data------",res.data.data);
         setData(res.data.data);
       })
-      .catch((res) => console.log(res));
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -104,14 +105,16 @@ const SchoolCard = () => {
           >
             {data.length > 0 &&
               data.map((data, index) => {
-                let imgLength = data.school.profilePic.length;
+                let imgLength = data.school.schoolImage;
                 let img;
                 if (imgLength) {
-                  let imgPath = data.school.profilePic[0].image;
+                  let imgPath = data.school.schoolImage;
                   img = `${url}${imgPath}`;
+                  // console.log('dataImage', data.school.schoolImage);
                 } else {
-                  img = schoollogo;
+                  img = schoolDefaultLogo;
                 }
+
                 return (
                   <SchoolCard1
                     key={index}
@@ -209,7 +212,7 @@ const SchoolCard1 = (props) => {
       <div className="slider-card-sch">
         <div className="post">
           <div className="header_post">
-            <div className="sch-logo-img"><img src={schDp} alt="logo" /></div>
+            <div className="sch-logo-img"><img src={schDp} alt="logo" style={{ display: 'flex', margin: 'auto', height: '65%', width: '80%' }} /></div>
           </div>
 
           <div className="body_post">

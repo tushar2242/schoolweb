@@ -90,6 +90,8 @@ export default class SignUp extends React.Component {
       phError: "none",
 
       isSubmit: true,
+      isOtp: false,
+      otp: '',
 
       isLoading: false,
     };
@@ -102,56 +104,57 @@ export default class SignUp extends React.Component {
     document.body.style.backgroundAttachment = "fixed !important";
   }
 
-  // handleSubmit(e) {
-  //   this.setState({ isLoading: true });
-  //   e.preventDefault();
-  //   const { name, dob, email, phone, stream, state, level, gender, password } =
-  //     this.state;
-
-  //   axios
-  //     .post(`${url}${endPoint}`, {
-  //       name: name,
-  //       gender: gender,
-  //       stream: stream,
-  //       state: state,
-  //       graduation: level,
-  //       dob: dob,
-  //       number: phone,
-  //       email: email,
-  //       password: password,
-  //     })
-  //     .then((res) => {
-  //       localStorage.setItem("accessToken", res.data.data.token);
-  //       localStorage.setItem("userId", res.data.data._id);
-
-  //       alert(res.data.msg);
-  //       window.location.reload();
-  //       this.setState({ isLoading: false });
-  //     })
-  //     .catch((err) => {
-  //       alert(err.msg);
-  //       if (err.response) {
-  //         // The request was made and the server responded with a status code
-  //         // that falls out of the range of 2xx
-  //         console.log(err.response.data);
-  //         console.log(err.response.status);
-  //         console.log(err.response.headers);
-  //       } else if (err.request) {
-  //         // The request was made but no response was received
-  //         // `err.request` is an instance of XMLHttpRequest in the browser and an instance of
-  //         // http.ClientRequest in node.js
-  //         console.log(err.request);
-  //       } else {
-  //         // Something happened in setting up the request that triggered an Error
-  //         console.log("Error", err.message);
-  //       }
-  //       this.setState({ isLoading: false });
-  //     });
-  // }
-
   handleSubmit(e) {
+    this.setState({ isLoading: true });
     e.preventDefault();
-    alert("Contact to Admin for New User");
+    const { name, dob, email, phone, stream, state, level, gender, password } =
+      this.state;
+
+    axios
+      .post(`${url}${endPoint}`, {
+        name: name,
+        gender: gender,
+        stream: stream,
+        state: state,
+        graduation: level,
+        dob: dob,
+        number: phone,
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        console.log(res)
+        localStorage.setItem("accessToken", res.data.data.token);
+        localStorage.setItem("userId", res.data.data._id);
+
+        alert(res.data.msg);
+        window.location.reload();
+        this.setState({ isLoading: false });
+      })
+      .catch((err) => {
+        alert(err.msg);
+        if (err.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else if (err.request) {
+          // The request was made but no response was received
+          // `err.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(err.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", err.message);
+        }
+        this.setState({ isLoading: false });
+      });
+  }
+
+  handleSign(e) {
+
+    this.setState({ isOtp: true })
   }
   render() {
     const {
@@ -169,17 +172,23 @@ export default class SignUp extends React.Component {
       passwordError,
       phError,
       isLoading,
+      isOtp,
+      otp
     } = this.state;
     const { hideSignUp, setLogin, handleLogindisplay } = this.props;
     // const formattedDob = moment(dob).format('yyyy-MM-dd');
     // console.log(formattedDob)
     return (
       <>
+
+
+
         <div className="formOuter">
           <center>
+
             <div className="txtContainer">
               <h4>Welcome Back</h4>
-              <p>Create your account here</p>
+              {!isOtp ? <p>Create your account here</p> : <p>Enter Otp To Verify the account</p>}
               {(
                 <div
                   className="clearIcon"
@@ -189,210 +198,237 @@ export default class SignUp extends React.Component {
                   <ClearIcon />
                 </div>
               )}
-              <form className="signUpOuter" onSubmit={this.handleSubmit}>
-                <TextField
-                  value={name}
-                  label="Name"
-                  variant="outlined"
-                  className="LogininputBox"
-                  focused
-                  required
-                  onChange={(e) => {
-                    this.setState({ name: e.target.value });
-                    console.log(e.target.value);
-                    let nameCheck = /[a-zA-Z]{2,}/gms;
-                    if (!nameCheck.test(e.target.value)) {
-                      this.setState({
-                        nameError: "block",
-                        isSubmit: false,
-                      });
-                    } else {
-                      this.setState({ nameError: "none" });
-                    }
-                  }}
-                />
-                <label className="error" style={{ display: nameError }}>
-                  Name Must Be Greater than two character{" "}
-                </label>
-                <br />
+              {!isOtp ?
+                <div className="signUpOuter" >
+                  <TextField
+                    value={name}
+                    label="Name"
+                    variant="outlined"
+                    className="LogininputBox"
+                    focused
+                    required
+                    onChange={(e) => {
+                      this.setState({ name: e.target.value });
+                      // console.log(e.target.value);
+                      let nameCheck = /[a-zA-Z]{2,}/gms;
+                      if (!nameCheck.test(e.target.value)) {
+                        this.setState({
+                          nameError: "block",
+                          isSubmit: false,
+                        });
+                      } else {
+                        this.setState({ nameError: "none" });
+                      }
+                    }}
+                  />
+                  <label className="error" style={{ display: nameError }}>
+                    Name Must Be Greater than two character
+                  </label>
+                  <br />
 
-                <TextField
-                  value={dob}
-                  id="date"
-                  label="Date Of Birth"
-                  variant="outlined"
-                  className="LogininputBox"
-                  focused
-                  onChange={(e) => this.setState({ dob: e.target.value })}
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  required
-                />
-                <TextField
-                  value={email}
-                  label="Email"
-                  variant="outlined"
-                  type="email"
-                  className="LogininputBox"
-                  focused
-                  required
-                  onChange={(e) => {
-                    this.setState({ email: e.target.value, isSubmit: false });
-                    console.log(e.target.value);
-                    let emailCheck =
-                      /^[A-Za-z_0-9]{2,}@[A-Za-z]{2,}[.]{1}[A-Za-z.]{1,6}$/gms;
-                    if (!emailCheck.test(e.target.value)) {
-                      this.setState({ emailError: "block", isSubmit: false });
-                    } else {
-                      this.setState({ emailError: "none" });
-                    }
-                  }}
-                />
-                <label className="error" style={{ display: emailError }}>
-                  Enter a Correct Email
-                </label>
+                  <TextField
+                    value={dob}
+                    id="date"
+                    label="Date Of Birth"
+                    variant="outlined"
+                    className="LogininputBox"
+                    focused
+                    onChange={(e) => this.setState({ dob: e.target.value })}
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    required
+                  />
+                  <TextField
+                    value={email}
+                    label="Email"
+                    variant="outlined"
+                    type="email"
+                    className="LogininputBox"
+                    focused
+                    required
+                    onChange={(e) => {
+                      this.setState({ email: e.target.value, isSubmit: false });
+                      // console.log(e.target.value);
+                      let emailCheck =
+                        /^[A-Za-z_0-9]{2,}@[A-Za-z]{2,}[.]{1}[A-Za-z.]{1,6}$/gms;
+                      if (!emailCheck.test(e.target.value)) {
+                        this.setState({ emailError: "block", isSubmit: false });
+                      } else {
+                        this.setState({ emailError: "none" });
+                      }
+                    }}
+                  />
+                  <label className="error" style={{ display: emailError }}>
+                    Enter a Correct Email
+                  </label>
 
-                <TextField
-                  value={phone}
-                  label="Phone"
-                  variant="outlined"
-                  className="LogininputBox"
-                  focused
-                  required
-                  onChange={(e) => {
-                    this.setState({ phone: e.target.value });
-                    let phoneCheck = /^[6-9]\d{8}$/gms;
-                    if (!phoneCheck.test(phone)) {
-                      this.setState({
-                        phError: "block",
-                        isSubmit: false,
-                      });
-                    } else {
-                      this.setState({ phError: "none" });
-                    }
-                  }}
-                  type="phone"
-                />
-                <label className="error" style={{ display: phError }}>
-                  Enter a Correct Mobile No.
-                </label>
+                  <TextField
+                    value={phone}
+                    label="Phone"
+                    variant="outlined"
+                    className="LogininputBox"
+                    focused
+                    required
+                    onChange={(e) => {
+                      this.setState({ phone: e.target.value });
+                      let phoneCheck = /^[6-9]\d{8}$/gms;
+                      if (!phoneCheck.test(phone)) {
+                        this.setState({
+                          phError: "block",
+                          isSubmit: false,
+                        });
+                      } else {
+                        this.setState({ phError: "none" });
+                      }
+                    }}
+                    type="number"
+                  />
+                  <label className="error" style={{ display: phError }}>
+                    Enter a Correct Mobile No.
+                  </label>
 
-                <label htmlFor="gender-select" className="inptLabel">
-                  Select your gender:
-                </label>
-                <select
-                  value={gender}
-                  className="LogininputBox selectInputBox"
-                  variant="outlined"
-                  onChange={(e) => this.setState({ gender: e.target.value })}
-                >
-                  {Gender.map((value) => {
-                    return (
-                      <option key={value} value={value}>
-                        {value}
-                      </option>
-                    );
-                  })}
-                </select>
+                  <label htmlFor="gender-select" className="inptLabel">
+                    Select your gender:
+                  </label>
+                  <select
+                    value={gender}
+                    className="LogininputBox selectInputBox"
+                    variant="outlined"
+                    onChange={(e) => this.setState({ gender: e.target.value })}
+                  >
+                    {Gender.map((value) => {
+                      return (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      );
+                    })}
+                  </select>
 
-                <label htmlFor="stream" className="inptLabel">
-                  Learning Stream:
-                </label>
-                <select
-                  value={stream}
-                  className="LogininputBox selectInputBox"
-                  variant="outlined"
-                  onChange={(e) => this.setState({ stream: e.target.value })}
-                >
-                  {Stream.map((value) => {
-                    return (
-                      <option key={value} value={value}>
-                        {value}
-                      </option>
-                    );
-                  })}
-                </select>
-                <label htmlFor="state" className="inptLabel">
-                  State:
-                </label>
-                <select
-                  value={state}
-                  className="LogininputBox selectInputBox"
-                  variant="outlined"
-                  onChange={(e) => this.setState({ state: e.target.value })}
-                >
-                  {States.map((value) => {
-                    return (
-                      <option key={value.code} value={value.name}>
-                        {value.name}
-                      </option>
-                    );
-                  })}
-                </select>
-                <label htmlFor="education" className="inptLabel">
-                  Education Qualification:
-                </label>
-                <select
-                  value={level}
-                  className="LogininputBox selectInputBox"
-                  variant="outlined"
-                  onChange={(e) => this.setState({ level: e.target.value })}
-                >
-                  {Level.map((value) => {
-                    return (
-                      <option key={value} value={value}>
-                        {value}
-                      </option>
-                    );
-                  })}
-                </select>
+                  <label htmlFor="stream" className="inptLabel">
+                    Learning Stream:
+                  </label>
+                  <select
+                    value={stream}
+                    className="LogininputBox selectInputBox"
+                    variant="outlined"
+                    onChange={(e) => this.setState({ stream: e.target.value })}
+                  >
+                    {Stream.map((value) => {
+                      return (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <label htmlFor="state" className="inptLabel">
+                    State:
+                  </label>
+                  <select
+                    value={state}
+                    className="LogininputBox selectInputBox"
+                    variant="outlined"
+                    onChange={(e) => this.setState({ state: e.target.value })}
+                  >
+                    {States.map((value) => {
+                      return (
+                        <option key={value.code} value={value.name}>
+                          {value.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <label htmlFor="education" className="inptLabel">
+                    Education Qualification:
+                  </label>
+                  <select
+                    value={level}
+                    className="LogininputBox selectInputBox"
+                    variant="outlined"
+                    onChange={(e) => this.setState({ level: e.target.value })}
+                  >
+                    {Level.map((value) => {
+                      return (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      );
+                    })}
+                  </select>
 
-                <TextField
-                  value={password}
-                  label="Password"
-                  variant="outlined"
-                  className="LogininputBox"
-                  focused
-                  required
-                  onChange={(e) => {
-                    this.setState({ password: e.target.value });
-                    let passwordCheck =
-                      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/gms;
-                    if (!passwordCheck.test(phone)) {
-                      this.setState({
-                        passwordError: "block",
-                        isSubmit: false,
-                      });
-                    } else {
-                      this.setState({ passwordError: "none" });
-                    }
-                  }}
-                  type="password"
-                />
-                <label className="error" style={{ display: passwordError }}>
-                  Create a Correct passoword
-                </label>
+                  <TextField
+                    value={password}
+                    label="Password"
+                    variant="outlined"
+                    className="LogininputBox"
+                    focused
+                    required
+                    onChange={(e) => {
+                      this.setState({ password: e.target.value });
 
-                <br />
+                    }}
+                    type="password"
+                  />
+                  <label className="error" style={{ display: passwordError }}>
+                    Create a Correct passoword
+                  </label>
 
-                <div className="loginBtn">
-                  <Button variant="contained" color="success" type="submit">
-                    Sign Up
-                  </Button>
+                  <br />
+
+                  <div className="loginBtn">
+                    <Button variant="contained" color="success" onClick={() => {
+                      this.handleSign()
+                    }} >
+                      Sign Up
+                    </Button>
+                  </div>
+                  <br />
+                  <div className="forpass">
+                    Already have an account?
+                    <p onClick={hideSignUp} className="p-1">
+                      Login
+                    </p>
+                  </div>
                 </div>
-                <br />
-                <div className="forpass">
-                  Already have an account?{" "}
-                  <p onClick={hideSignUp} className="p-1">
-                    Login
-                  </p>
-                </div>
-              </form>
+                :
+                <>
+
+
+                  <TextField
+                    value={otp}
+                    label="OTP"
+                    variant="outlined"
+                    className="LogininputBox"
+                    type="number"
+                    focused
+                    required
+                    onChange={(e) => {
+                      this.setState({ otp: e.target.value });
+                    }}
+                  />
+
+                  <br />
+
+                  <div className="loginBtn">
+                    <Button variant="contained" color="warning" onClick={() => this.handleSubmit()}>
+                      Submit Otp
+                    </Button>
+                  </div>
+                  <div className="forpass mt-3">
+                    <p onClick={hideSignUp} className="p-1">
+                      Resend OTP
+                    </p>
+                  </div>
+                </>
+              }
             </div>
+
           </center>
         </div>
+
       </>
     );
   }

@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     id: 'None',
     isLoading: false,
-    search: ''
+    search: '',
+    schools: [],
 };
 
 // Create a slice of the store using createSlice
@@ -21,11 +22,14 @@ const postSlice = createSlice({
         },
         addSearch: (state, action) => {
             state.search = action.payload
+        },
+        addSchool: (state, action) => {
+            state.schools = action.payload
         }
     }
 });
 
 
-export const { addId, setLoading, addSearch } = postSlice.actions;
+export const { addId, setLoading, addSearch, addSchool } = postSlice.actions;
 
 export default postSlice.reducer;

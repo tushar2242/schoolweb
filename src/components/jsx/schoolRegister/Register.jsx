@@ -170,7 +170,7 @@ export default class Register extends React.Component {
 
             reader.onload = () => {
                 this.setState({
-                    dpPreview: reader.result,
+                    dpPreview: reader.result, 
                     schoolDp: file
                 })
             }

@@ -28,6 +28,10 @@ const responsive = {
         breakpoint: { max: 464, min: 0 },
         items: 1,
     },
+    Smallmobile: {
+        breakpoint: { max: 700, min: 0 },
+        items: 1,
+    },
 };
 
 class ArticalCard extends React.Component {
@@ -97,7 +101,7 @@ export const RecentArticle = () => {
                         autoPlay={true}
                         autoPlaySpeed={2000}
                         keyBoardControl={true}
-                        removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
+                        removeArrowOnDeviceType={["desktop", "tablet", "mobile", "Smallmobile"]}
                     >
                         {articleData && articleData.map((item, index) => {
                             return (

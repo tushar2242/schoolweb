@@ -59,7 +59,7 @@ export default class Home extends React.Component {
 
         <AboutSchool />
 
-        <RegisterBanner />
+        {/* <RegisterBanner /> */}
 
         <CounterCard />
 

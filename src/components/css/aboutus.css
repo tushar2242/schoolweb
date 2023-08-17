@@ -1,0 +1,19 @@
+.abt-hd-font{
+    font-size:25px;
+    font-weight:600;
+    color:rgb(26, 26, 26);
+}
+.abt-us-para{
+    font-size:17px;
+    font-weight:500;
+    color:rgb(121, 121, 121);
+    text-align: justify;
+}
+.underline{
+    border-bottom:solid 2px #e74c3c;
+    width:120px;
+}
+.abt-us-box{
+    background-color:rgb(231, 250, 248);
+    padding:20px;
+}
