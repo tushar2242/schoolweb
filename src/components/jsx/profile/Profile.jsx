@@ -168,7 +168,9 @@ const Profile = () => {
   return (
     <>
 
-      <VerfiyMail />
+      <VerfiyMail
+        email={email}
+      />
       {proMessage !== "" && <Message msg={proMessage} color={proColor} />}
 
       {profileForm && (
@@ -323,14 +325,20 @@ const Message = (props) => {
 
 
 
-const VerfiyMail = () => {
+const VerfiyMail = ({ email }) => {
+
+  const [otp, setOtp] = useState('')
+
+
   return (
     <>
       <div className="verify-outer">
         <div className="form-box-ht">
 
           <label className="form-label fs-5 text-center">Verify Your Identity</label>
-          <input type="text" className="form-control form-bx-int" />
+          <p>Otp Sent to :- {email}</p>
+          <input type="number" className="form-control form-bx-int" value={otp} onChange={(e) => setOtp(e.target.value)} />
+          <span className="fs-6 px-1 py-3">Enter OTP for Verify</span>
           <div><button className="fm-sub-btn">Submit</button></div>
 
         </div>

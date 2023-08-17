@@ -15,8 +15,9 @@
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgb(231, 230, 230);
     position: relative;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     z-index: 20000;
+    /* color: rgb(3, 121, 3); */
 }
 
 .form-bx-int {
@@ -26,6 +27,12 @@
     border-right: none;
     border-left: none;
 
+}
+
+
+.form-bx-int:focus{
+    outline: none;
+    box-shadow: none;
 }
 
 .fm-sub-btn {
