@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import logo from "../../images/logo3.png";
 import Notification from "../notification/Notification";
 
-const proto = "http://";
-const endPoint = "send/mail";
-const url = `${proto}34.29.141.94/`;
+const proto = "https://";
+const endPoint = "forget/password/mail-send/";
+const url = `https://hammerhead-app-iohau.ondigitalocean.app/`;
 
 const ResetPass = () => {
   return (
@@ -19,6 +20,9 @@ const ResetPass = () => {
 export default ResetPass;
 
 const ResetPassByEmail = () => {
+
+  // const navigate = useNavigate()
+
   const [resetEmail, setResetEmail] = useState("");
   const [proMessage, setProMessage] = useState("");
   const [proColor, setProColor] = useState("");
@@ -27,16 +31,15 @@ const ResetPassByEmail = () => {
     setProMessage("");
     setProColor("");
     axios
-      .post(`${url}${endPoint}`, {
-        email: resetEmail,
-      })
+      .post(`${url}${endPoint}${resetEmail}`)
       .then((res) => {
         console.log(res);
-        setProMessage("Email Send Succesfully");
+        setProMessage("Email Send Successfully");
         setProColor("alert alert-success");
+        setResetEmail('')
       })
       .catch((res) => {
-        console.log(res);
+        console.log(res.data);
         setProMessage("Please Enter a Correct E-mail");
         setProColor("alert alert-error");
       });

@@ -12,6 +12,9 @@ import { addSearch } from '../../redux/post/postSlice';
 import LoadingPage from "../loader/LoadingPage";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import Tooltip from '@mui/material/Tooltip';
 
 
 // const accessToken = localStorage.getItem('accessToken');
@@ -29,6 +32,8 @@ const NavBar = () => {
     const dispatch = useDispatch();
     const searchValue = useSelector((state) => state.post.search);
     const navigate = useNavigate()
+
+    const [isIcon, setIsIcon] = useState(false)
 
     useEffect(() => {
         setSearch(searchValue)
@@ -85,6 +90,8 @@ const NavBar = () => {
         }
 
     }
+
+
     function showLogin() {
         setLogin(true)
 
@@ -142,10 +149,10 @@ const NavBar = () => {
 
                             <i className="fa fa-search searchInputIcon" aria-hidden="true" style={{ cursor: 'pointer' }} onClick={handleSearchRedux}></i>
                         </div>
-                        {userId && <li>
-                            <NavLink to="/Register" className="reg-color hover-list-color">
-                                <b>Register</b>
-                            </NavLink>
+                        {<li style={{ width: '30px' }}>
+                            <div className="reg-color hover-list-color">
+
+                            </div>
                         </li>}
                         {getLogin ? <li>
                             <NavLink className="log-color hover-list-color" onClick={showLogin} >
@@ -156,28 +163,49 @@ const NavBar = () => {
                             (!userId) ?
                                 <li>
                                     <NavLink className="log-color hover-list-color" onClick={showLogin}>
-                                        <b>Login</b>
+                                        <b>Login / Sign Up</b>
                                     </NavLink>
                                 </li>
                                 :
-                                <NavDropdown
-                                    id="nav-dropdown-example"
-                                    title={<AccountIcon />}
-                                    menuVariant="dark"
-                                    className='userIcon'
-                                    style={{
-                                        top: '15px'
-                                    }}
-                                >
+                                <>
+                                    {/* <div className="up-icon">
+                                        {
 
-                                    <NavLink to='/profile' className='dropdown-item'>
-                                        Profile
-                                    </NavLink>
-                                    <NavDropdown.Item onClick={handleLogOut}>
-                                        Log Out
-                                    </NavDropdown.Item>
 
-                                </NavDropdown>
+
+                                            !isIcon ? <ArrowDropDownIcon />
+                                                : <ArrowDropUpIcon />
+
+                                        }
+                                    </div> */}
+
+                                  
+
+                                        <NavDropdown
+                                            id="nav-dropdown-example"
+                                            title={<AccountIcon />}
+                                            menuVariant="dark"
+                                            className='userIcon'
+                                            style={{
+                                                top: '15px'
+                                            }}
+
+                                            onClick={() => {
+                                                setIsIcon(!isIcon)
+                                            }}
+                                        >
+
+                                            <NavLink to='/profile' className='dropdown-item'>
+                                                Profile
+                                            </NavLink>
+                                            <NavDropdown.Item onClick={handleLogOut}>
+                                                Log Out
+                                            </NavDropdown.Item>
+
+                                        </NavDropdown>
+                                    
+                                </>
+
                         }
                     </ul>
                     <NavLink to='/' className="logo-image" >

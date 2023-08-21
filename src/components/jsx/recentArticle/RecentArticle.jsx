@@ -6,6 +6,9 @@ import CommentIcon from '@mui/icons-material/Comment';
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import CompTitle from "../componentTitle/CompTitle";
+import { useDispatch } from "react-redux";
+import { addBlogId } from "../../redux/post/postSlice";
+import { useNavigate } from "react-router-dom";
 
 
 const url = 'https://hammerhead-app-iohau.ondigitalocean.app/';
@@ -34,40 +37,45 @@ const responsive = {
     },
 };
 
-class ArticalCard extends React.Component {
+const ArticalCard = ({ item }) => {
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    // console.log(item)
+    // console.log(description.substring(0,100))
+    return (
+        <div onClick={async () => {
+            await dispatch(addBlogId(item._id));
+            await localStorage.setItem("blogId", item._id);
+            navigate('/articleDetails')
+        }}>
+            <div className="column">
+                {/* <div className="demo-title">{item.category}</div> */}
 
-    render() {
-        const { articleImg, articleTitle, description } = this.props;
-        // console.log(description.substring(0,100))
-        return (
-            <NavLink to='/articleDetails'>
-                <div className="column">
-                    <div className="demo-title">Normal</div>
+                <div className="post-module">
 
-                    <div className="post-module">
-
-                        <div className="thumbnail">
-                            <div className="date">
-                                <div className="day">27</div>
-                                <div className="month">Mar</div>
-                            </div>
-                            <img src={url + articleImg} alt="img" />
+                    <div className="thumbnail">
+                        <div className="date">
+                            <div className="day">28th</div>
+                            <div className="month">Mar</div>
                         </div>
 
-                        <div className="post-content">
-                            <div className="category">Photos</div>
-                            <h2 className="title">{articleTitle}</h2>
-                            {/* <h2 className="sub_title">The city that never sleeps.</h2> */}
-                            <p className="description">{description.length == 100 ? description : description.substring(0, 100) + "..."} </p>
-                            <div className="post-meta"><span className="timestamp"><Clock /> 6 mins ago</span><span className="comments"><CommentIcon /> 39 comments</span></div>
-                        </div>
+                        <img src={url + item.image} alt="img" />
+                    </div>
+
+                    <div className="post-content">
+                        <div className="category">{item.category}</div>
+                        <h2 className="title">{item.title}</h2>
+                        {/* <h2 className="sub_title">The city that never sleeps.</h2> */}
+                        <p className="description">{item.des.length == 100 ? item.des : item.des.substring(0, 100) + "..."} </p>
+                        <div className="post-meta"><span className="timestamp"><Clock /> {item.timeOfCreate}</span><span className="comments"><CommentIcon /> 39 comments</span></div>
                     </div>
                 </div>
-            </NavLink>
-        )
-    }
+            </div>
+        </div>
+    )
 }
+
 
 export const RecentArticle = () => {
 
@@ -86,7 +94,7 @@ export const RecentArticle = () => {
 
     return (
         <>
-            <div className="container-fluid" style={{paddingLeft:'10px',paddingRight:'0px'}}>
+            <div className="container-fluid" style={{ paddingLeft: '10px', paddingRight: '0px' }}>
                 <CompTitle title="Recent" spanTitle="Articles" />
 
                 <div className="IndicatorCarousel">
@@ -103,14 +111,11 @@ export const RecentArticle = () => {
                         keyBoardControl={true}
                         removeArrowOnDeviceType={["desktop", "tablet", "mobile", "Smallmobile"]}
                     >
-                        {articleData && articleData.map((item, index) => {
+                        {articleData && articleData.map((item) => {
                             return (
                                 <div className="IndicatorCarouselCard" key={item._id}>
                                     <ArticalCard
-                                        key={index}
-                                        articleTitle={item.title}
-                                        articleImg={item.image}
-                                        description={item.des}
+                                        item={item}
                                     />
                                 </div>
                             )

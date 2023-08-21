@@ -21,6 +21,18 @@
   color: #ff5100 !important;
 }
 
+
+
+.up-icon{
+  position: absolute;
+  top: 22px;
+  right: 70px;
+}
+
+.up-icon svg{
+  font-size: 1.8rem;
+}
+
 @media only screen and (max-width: 767.98px) {
   .nav-contx {
     max-width: 1500px;

@@ -62,17 +62,31 @@ const SchoolCard = () => {
   const [data, setData] = useState([]);
 
   //  / const id = useSelector((state) => state.post.id);
-  // console.log(id);
+
+
+
+  async function fetchIp() {
+    try {
+      const ipRes = await axios.get('https://api.ipify.org?format=json')
+      // console.log(ipRes.data.ip)
+      localStorage.setItem("ip", ipRes.data.ip)
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
 
   useEffect(() => {
     setSchoolData();
+    fetchIp()
   }, []);
 
   const setSchoolData = () => {
     axios
       .get(`${url}${endPoint}`)
       .then((res) => {
-        console.log("data------",res.data.data);
+        // console.log("data------",res.data.data);
         setData(res.data.data);
       })
       .catch((error) => console.log(error));
@@ -117,10 +131,10 @@ const SchoolCard = () => {
 
                 return (
                   <SchoolCard1
-                    key={index}
-                    schId={data._id}
+                    key={data.school._id}
+                    schId={data.school._id}
                     schName={data.school.name}
-                    schView={data.views}
+                    schView={data.school.views}
                     schDp={img}
                     schLocation={data.school.address}
                     schRating="1"
@@ -203,6 +217,24 @@ const SchoolCard1 = (props) => {
     schId,
   } = props;
 
+  const ip = localStorage.getItem('ip');
+  const userId = localStorage.getItem('userId');
+
+  async function addViews(schId) {
+    try {
+      const viewRes = await axios.post(url + 'view/create?userId=' + userId, {
+        "Ip": ip,
+        "schoolId": schId
+      })
+
+      // console.log(viewRes.data)
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -219,6 +251,7 @@ const SchoolCard1 = (props) => {
             <div className="post_content" onClick={async () => {
               await dispatch(addId(schId));
               await localStorage.setItem("postId", schId);
+              await addViews(schId)
               navigate('/showSchool')
             }}>
               <h5 className="bht-sch-heading">{schName} <CheckCircleIcon className="mat-icon1" /></h5>

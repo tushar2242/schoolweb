@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import Slider from "react-slick";
 import Carousel from 'react-multi-carousel';
 // import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,8 +8,11 @@ import Carousel from 'react-multi-carousel';
 import 'swiper/css/virtual';
 
 import 'swiper/css';
+import axios from 'axios';
 // import company from './logo1.png';
 
+const endPoint = "new-gets";
+const url = `https://hammerhead-app-iohau.ondigitalocean.app/`;
 
 
 const responsive = {
@@ -32,44 +35,66 @@ const responsive = {
 };
 
 
-export default class NewsCard extends React.Component {
+const NewsCard = () => {
+  const [news,setNews] = useState([])
 
-  render() {
-    return (
-      <>
-        <Carousel
-          swipeable={true}
-          draggable={true}
-          showDots={false}
-          responsive={responsive}
-          ssr={true} // means to render carousel on server-side.
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={2000}
-          keyBoardControl={true}
-          removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
-        >
-          <LogoImage />
-          <LogoImage />
-          <LogoImage />
-          <LogoImage />
-          <LogoImage />
-
-        </Carousel>
-      </>
-      // <NewSlider></NewSlider>
-    )
+  async function fetchNews() {
+    try {
+      const newsRes = await axios.get(url + endPoint)
+      console.log(newsRes.data)
+      setNews(newsRes.data.data)
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
+
+  useEffect(() => {
+    fetchNews()
+  }, [])
+
+  return (
+    <>
+      <Carousel
+        swipeable={true}
+        draggable={true}
+        showDots={false}
+        responsive={responsive}
+        ssr={true} // means to render carousel on server-side.
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={2000}
+        keyBoardControl={true}
+        removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
+      >
+       {
+        news.length>0 && news.map((news)=>{
+          return(
+            <LogoImage 
+              news={news}
+            />
+          )
+        })
+       }
+      </Carousel>
+    </>
+    // <NewSlider></NewSlider>
+  )
 }
+
+export default NewsCard
 
 
 class LogoImage extends React.Component {
   render() {
 
+    const {news} = this.props;
+
+
     return (
       <>
         <div className="newsImg">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/2.png" alt="news" />
+          <img src={url+news.image} alt="news" />
         </div>
       </>
     )

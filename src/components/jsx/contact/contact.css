@@ -1,0 +1,55 @@
+.contact-box{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    box-shadow:2px 2px 5px 5px rgb(238, 238, 238);
+    padding:50px;
+}
+.cont-box-1{
+    background-color: rgb(219, 3, 3);
+    color:white;
+    padding:15px;
+}
+.cont-box-2{
+    width:70%;
+    padding:20px;
+}
+.option-box{
+    margin-top:30px;
+}
+
+.send-opt-btn{
+    padding-left:40px;
+    padding-right:40px;
+    padding-top:7px;
+    padding-bottom:7px;
+    color:white;
+    border:none;
+    background-color:rgb(2, 86, 112);
+    border-radius:10px;
+   
+}
+.opt-input-box{
+    border:solid 1.5px rgb(61, 61, 61);
+    font-size:15px;
+    font-weight:500;
+    border-radius:8px;
+}
+.label-inpt-text{
+    font-size:16px;
+    font-weight:500
+}
+.p-tag-font{
+    font-size:16px;
+    font-weight:500;
+    letter-spacing: 0.75px;
+}
+@media only screen and (max-width:76.98px){
+    .contact-box{
+        width:100%;
+        max-width:900px;
+        margin:auto;
+        box-shadow:2px 2px 5px 5px rgb(238, 238, 238);
+        padding:10px !important
+    }
+}

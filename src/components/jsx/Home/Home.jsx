@@ -17,6 +17,7 @@ import CounterCard from '../counter/CounterCard';
 // import LoadingPage from "../loader/LoadingPage";
 
 import { RecentArticle } from '../recentArticle/RecentArticle';
+import LoadingPage from '../loader/LoadingPage';
 // import LoadingPage from '../loader/LoadingPage';
 // const proto = "http://";
 // const endPoint = "counter";
@@ -37,7 +38,7 @@ export default class Home extends React.Component {
   componentDidMount() {
 
     // TweenMax.fromTo('.shadow', 0.7, { y: -70, opacity: 0 }, { y: 0, opacity: 1 });
-    // this.setState({ isLoading: false })
+    this.setState({ isLoading: false })
     // const accessToken = localStorage.getItem('accessToken');
     // console.log(accessToken);
     // const userId = localStorage.getItem('userId');
@@ -47,10 +48,10 @@ export default class Home extends React.Component {
 
 
   render() {
-    // const { isLoading } = this.state;
+    const { isLoading } = this.state;
     return (
       <>
-
+      {isLoading && <LoadingPage msg='Loading'/>}
         <NavBar />
 
         <Banner />

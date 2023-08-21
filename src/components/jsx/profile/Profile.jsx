@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState } from "react";
-import Notification from "../notification/Notification";
+// import Notification from "../notification/Notification";
 import './verifyMail.css';
 //import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -35,7 +35,7 @@ const Profile = () => {
   const [proColor, setProColor] = useState("");
 
   const [isVerify, setIsVerify] = useState(false)
-
+  const [otpPage, setOtp] = useState(false)
   // const location = useLocation();
   // const profiledata = location.state;
   const [isEditable, setIsEditable] = useState(true);
@@ -45,6 +45,29 @@ const Profile = () => {
 
   };
 
+
+
+
+  async function sendMail(mail) {
+    try {
+      const mailRes = await axios.post(`${url}mail/send/ForOtp?userId=${userID}`, {
+        "email": mail
+      })
+      console.log(mailRes.data)
+      alert(mailRes.data.msg)
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
+
+
+
+
+  function showProfile() {
+    setOtp(true)
+  }
   useEffect(() => {
     getProfile();
   }, []);
@@ -170,6 +193,7 @@ const Profile = () => {
 
       <VerfiyMail
         email={email}
+        otpPage={otpPage}
       />
       {proMessage !== "" && <Message msg={proMessage} color={proColor} />}
 
@@ -251,8 +275,11 @@ const Profile = () => {
                     className="editInput"
                   />
                   {
-                    !isVerify ? <span className="px-3 fs-6 py-1">verify</span>
-                      : <span className="px-2 py-1">verified</span>
+                    !isVerify ? <span className="px-3 fs-6 py-1" onClick={() => {
+                      showProfile()
+                      sendMail(cleanedEmail)
+                    }}>verify</span>
+                      : <span className="px-2 py-1 vfd">verified</span>
                   }
 
 
@@ -325,24 +352,56 @@ const Message = (props) => {
 
 
 
-const VerfiyMail = ({ email }) => {
+
+const VerfiyMail = ({ email, otpPage }) => {
 
   const [otp, setOtp] = useState('')
+  const userId = localStorage.getItem('userId');
+  console.log(userId);
+  console.log(otp);
+  function OtpSubmit() {
+
+    axios
+      .post(`https://hammerhead-app-iohau.ondigitalocean.app/otp/verify?userId=${userId}`, { 'otp': otp })
+      .then((res) => {
+        console.log(res.data);
+        alert("User Veryfied")
+        window.location.reload();
+      })
+      .catch((res) => {
+        console.log("Error " + res);
+      });
+  }
 
 
   return (
     <>
-      <div className="verify-outer">
-        <div className="form-box-ht">
+      {otpPage &&
+        <div className="verify-outer" >
+          <div className="form-box-ht">
 
-          <label className="form-label fs-5 text-center">Verify Your Identity</label>
-          <p>Otp Sent to :- {email}</p>
-          <input type="number" className="form-control form-bx-int" value={otp} onChange={(e) => setOtp(e.target.value)} />
-          <span className="fs-6 px-1 py-3">Enter OTP for Verify</span>
-          <div><button className="fm-sub-btn">Submit</button></div>
+            <label className="form-label fs-5 text-center">Verify Your Identity</label>
+            <p>Otp Sent to :- {email}</p>
+            <input type="number" className="form-control form-bx-int" value={otp} onChange={(e) => setOtp(e.target.value)} />
+            <span className="fs-6 px-1 py-3">Enter OTP for Verify</span>
+            <div><button className="fm-sub-btn" onClick={OtpSubmit}>Submit</button></div>
 
+          </div>
         </div>
-      </div>
+      }
     </>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

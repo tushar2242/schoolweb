@@ -135,6 +135,13 @@
   display: inline-block;
 }
 
+
+.dropdown-toggle::after{
+  display: none;
+}
+
+
+
 .outer-message .toast__icon img {
   width: 100%;
   height: 100%;

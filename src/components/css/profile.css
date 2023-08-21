@@ -23,7 +23,9 @@
   text-transform: capitalize;
 }
 
-
+.verify-email .vfd{
+  cursor: default;
+}
 
 
 

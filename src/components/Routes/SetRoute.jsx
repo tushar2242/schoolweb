@@ -20,6 +20,7 @@ import schIcon from '../images/logo2.png';
 import AboutSchool from '../jsx/aboutUs/AboutSchool'
 import Terms from '../jsx/privacy-policy/Terms'
 import PrivacyPolicy from '../jsx/privacy-policy/PrivacyPolicy'
+import ContactUs from "../jsx/contact/ContactUs";
 const SetRoute = () => {
   return (
     <>
@@ -30,7 +31,7 @@ const SetRoute = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/enquiry1" element={<EnquiryForm />} />
-          <Route path="/Register" element={<Register />} />
+          {/* <Route path="/Register" element={<Register />} /> */}
           <Route path="/showSchool" element={<CardDetail />} />
           <Route path="/search" element={<Search />} />
           <Route path="/card" element={<SchoolCardCarousel />} />
@@ -41,7 +42,8 @@ const SetRoute = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/articleDetails" element={<ArticleDetail />} />
           <Route path="/resetpass" element={<ResetPass />} />
-          <Route path="/newpass" element={<NewPassWord />} />
+          <Route path='/ContactUs' element={<ContactUs/>} />
+          {/* <Route path="/newpass" element={<NewPassWord />} /> */}
           {/* <Route path="/anime" element={<AnimationUsingaos />} /> */}
           <Route
             path="*"

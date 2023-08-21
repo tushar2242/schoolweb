@@ -6,6 +6,7 @@ const initialState = {
     isLoading: false,
     search: '',
     schools: [],
+    blogId: ''
 };
 
 // Create a slice of the store using createSlice
@@ -25,11 +26,14 @@ const postSlice = createSlice({
         },
         addSchool: (state, action) => {
             state.schools = action.payload
+        },
+        addBlogId: (state, action) => {
+            state.blogId = action.payload
         }
     }
 });
 
 
-export const { addId, setLoading, addSearch, addSchool } = postSlice.actions;
+export const { addId, setLoading, addSearch, addSchool, addBlogId } = postSlice.actions;
 
 export default postSlice.reducer;

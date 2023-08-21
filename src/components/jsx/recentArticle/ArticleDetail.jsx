@@ -17,97 +17,159 @@ import { RecentArticle } from './RecentArticle';
 import './comment.css'
 import { useState } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+
+
+const url = `https://hammerhead-app-iohau.ondigitalocean.app/`;
+const endPoint = 'blog/getsById?blogeId='
+const commentEndPoint = 'get/comment/blog?blogId='
 
 
 
-export default class ArticleDetail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isData: false,
 
-      isComment: false,
+
+const blogId = localStorage.getItem('blogId');
+const userId = localStorage.getItem('userId')
+
+const ArticleDetail = () => {
+
+
+
+
+
+
+
+  const [isData, setIsData] = useState([]);
+  const [isComment, setIsComment] = useState(false)
+
+  const articleId = useSelector((state) => state.post.blogId)
+
+  async function fetchArticleDetails() {
+    try {
+      if (articleId !== '') {
+        const res = await axios.get(`${url}${endPoint}${articleId}`);
+        console.log(res.data.data[0]);
+        setIsData(res.data.data[0])
+      } else {
+        const res = await axios.get(`${url}${endPoint}${blogId}`);
+        console.log(res.data.data[0])
+        setIsData(res.data.data[0])
+      }
+    } catch (error) {
+      console.log(error)
     }
-    this.componentDidMount = this.componentDidMount.bind(this);
-    this.commentUpdate = this.commentUpdate.bind(this);
-  }
+  };
 
-  componentDidMount() {
+
+
+  useEffect(() => {
+    fetchArticleDetails()
     window.scrollTo(0, 0)
+  }, [blogId, articleId])
+
+  function commentUpdate() {
+    setIsComment(!isComment)
   }
 
-  commentUpdate() {
-    const isComment = this.state.isComment;
-    this.setState({ isComment: !isComment })
-  }
 
-  render() {
+  return (
+    <>
+      <NavBar />
+      <div className="container mt-4" style={{ paddingTop: '30px' }}>
+        <div className="row">
+          <div className="col-md-8">
+            <BlogDetails
+              commentUpdate={commentUpdate}
+              blog={isData}
+            />
 
-    const { isComment } = this.state;
-    return (
-      <>
-        <NavBar />
-        <div className="container mt-4" style={{ paddingTop: '30px' }}>
-          <div className="row">
-            <div className="col-md-8">
-              <BlogDetails
-                commentUpdate={this.commentUpdate}
-              />
-
-              {
-                isComment && <Comments />
-              }
-
-            </div>
-            <div className="col-md-4">
-              <Category />
-              <RecentPost />
-              <NewsLetter />
-              <StayConnect />
-            </div>
-
+            {
+              isComment && <Comments />
+            }
 
           </div>
-        </div>
+          <div className="col-md-4">
+            <Category />
+            <RecentPost />
+            <NewsLetter />
+            <StayConnect />
+          </div>
 
-        <RecentArticle />
-        <Footer />
-      </>
-    )
-  }
+
+        </div>
+      </div>
+
+      <RecentArticle />
+      <Footer />
+    </>
+  )
 }
 
 
-const BlogDetails = ({ commentUpdate }) => {
+export default ArticleDetail
 
+const BlogDetails = ({ commentUpdate, blog }) => {
+
+  // console.log(blog)
   // const { commentUpdate } = props;
 
+  const addLike = '/like/blog?userId=';
+  const removeLike = 'unlike/blog?userId='
+
   const [like, setLike] = useState(false);
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(0);
+
+
+  async function LikeFn(point) {
+    try {
+      const res = await axios.post(url + point + userId, {
+        "blogId": blogId
+      })
+      console.log(res.data)
+    }
+    catch (err) {
+      console.log(err)
+      // alert(err.response.data.msg)
+    }
+  }
+
+  async function fetchLike() {
+    const getLike = await blog.like;
+    await setCount(getLike)
+  }
+
+
+  useEffect(() => {
+    console.log(blog.like)
+    // fetchLike()
+    // setCount(blog.like)
+  }, [])
+
 
   function isLike() {
     setLike(!like)
     if (!like) {
       setCount(count + 1)
+      LikeFn(addLike)
     }
     else {
       setCount(count - 1)
+      LikeFn(removeLike)
     }
   }
 
 
   return (
     <>
-      <div className=""><img src={blogImage} alt="Blog" className="img-fluid" /></div>
-      <h3 className="blog-del-heading">Six Things Parents Should Consider Before Selecting a CBSE School</h3>
-      <p className="blog-detail-para">MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower</p>
-      <p className="blog-detail-para">MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually</p>
-      <div className="blog-headline-box mt-4">
-        <div className="headline-box">
-          <p className="blog-detail-para">MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training.</p>
-        </div>
+      <div className="">
+        <img src={url + blog.image} alt="Blog" className="article-details" />
       </div>
-      <p className="blog-detail-para">MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower</p>
+      <h3 className="blog-del-heading">{blog.title}</h3>
+      <div dangerouslySetInnerHTML={{ __html: blog.des2 }}>
+
+      </div>
 
       <hr className="mt-4"></hr>
       <div className="comment-box">
@@ -124,8 +186,8 @@ const BlogDetails = ({ commentUpdate }) => {
           commentUpdate()
         }}>
           <ChatBubbleOutlineIcon className="fs-5" />
-          06 Comments</p>
-        <p className="blog-detail-para"><PersonOutlineIcon className="fs-5" /> By Jhon Joe</p>
+          {blog.comment} Comments</p>
+        <p className="blog-detail-para"><PersonOutlineIcon className="fs-5" /> {blog.name}</p>
       </div>
     </>
   )
@@ -138,15 +200,15 @@ class Category extends React.Component {
         <div className="blog-headline-box">
           <h5><b>Category</b></h5>
           <hr />
-          <p className="blog-detail-para pointer-del">CBSE Board (50)</p>
+          <p className="blog-detail-para pointer-del">Technology (20)</p>
           <hr />
-          <p className="blog-detail-para pointer-del">CBSE Board (50)</p>
+          <p className="blog-detail-para pointer-del">Nature (52)</p>
           <hr />
-          <p className="blog-detail-para pointer-del">CBSE Board (50)</p>
+          <p className="blog-detail-para pointer-del">Health (23)</p>
           <hr />
-          <p className="blog-detail-para pointer-del">CBSE Board (50)</p>
-          <hr />
-          <p className="blog-detail-para pointer-del">CBSE Board (50)</p>
+          <p className="blog-detail-para pointer-del">Finance (13)</p>
+          {/* <hr /> */}
+          {/* <p className="blog-detail-para pointer-del">CBSE Board (50)</p> */}
         </div>
       </>
     )
@@ -225,7 +287,46 @@ class StayConnect extends React.Component {
 
 const Comments = () => {
 
-  const [comment, setComment] = useState('')
+  const addcom = 'comment/bloge?userId='
+
+
+  const [comment, setComment] = useState('');
+
+  const [commentData, setCommentData] = useState([])
+
+
+  async function fetchCommentData() {
+    try {
+      const res = await axios.get(url + commentEndPoint + blogId)
+
+      console.log(res.data.data)
+      setCommentData(res.data.data)
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    fetchCommentData()
+  }, [blogId, userId])
+
+
+  async function handleAddComment() {
+    try {
+      const res = await axios.post(url + addcom + userId, {
+        "blogId": blogId,
+        "comment": comment
+      })
+      console.log(res.data)
+      setComment('')
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
+
+
   return (
     <>
       <div className="container bootdey">
@@ -244,48 +345,72 @@ const Comments = () => {
                   className="btn btn-sm btn-primary"
                   type="submit"
                   style={{ border: 'solid 1px' }}
+                  onClick={() => {
+                    handleAddComment()
+                  }}
                 >
                   <i className="fa fa-pencil fa-fw"></i> Add Comment
                 </button>
                 {/* <a className="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#"></a>
-      <a className="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#"></a>
-      <a className="btn btn-trans btn-icon fa fa-file add-tooltip" href="#"></a> */}
+                      <a className="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#"></a>
+                      <a className="btn btn-trans btn-icon fa fa-file add-tooltip" href="#"></a> */}
               </div>
             </div>
           </div>
-          <div className="panel">
-            <div className="panel-body">
-              {/* <!-- Newsfeed Content -->
-    <!--===================================================--> */}
-              <div className="media-block">
-                <a className="media-left" href="#">
-                  <img
-                    className="comment-profile"
-                    alt="Profile Picture"
-                    src="https://bootdey.com/img/Content/avatar/avatar1.png"
+          {
+            commentData.length > 0 && commentData.map((comment) => {
+
+              return (
+                <>
+                  <CommentSection
+                    comment={comment}
                   />
-                </a>
-                <div className="media-body">
-                  <div className="ms-3">
-                    <a
-                      href="#"
-                      className="btn-link text-semibold media-heading box-inline text-decoration-none"
-                    >
-                      Lisa D.
-                    </a>
-                    <p className="text-muted text-sm mt-2">
-                      <i className="fa fa-mobile fa-lg"></i> 11
-                      min ago
-                    </p>
-                  </div>
-                  <p>
-                    consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                    tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                    wisi enim ad minim veniam, quis nostrud exerci tation
-                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-                    consequat.
-                  </p>
-                  {/* <div className="pad-ver">
+                </>
+              )
+            })
+          }
+
+
+
+        </div>
+      </div>
+    </>
+  )
+}
+
+
+const CommentSection = ({ comment }) => {
+
+  return (
+    <>
+      <div className="panel">
+        <div className="panel-body">
+          {/* <!-- Newsfeed Content --*/}
+          <div className="media-block">
+            <div className="media-left" href="#">
+              <img
+                className="comment-profile"
+                alt="Profile Picture"
+                src={url + comment.user[0].image}
+              />
+            </div>
+            <div className="media-body">
+              <div className="ms-3">
+                <div
+
+                  className="btn-link text-semibold media-heading box-inline text-decoration-none"
+                >
+                  {comment.user[0].name}
+                </div>
+                <p className="text-muted text-sm mt-2">
+                  <i className="fa fa-mobile fa-lg"></i> 11
+                  min ago
+                </p>
+              </div>
+              <p>
+                {comment.comment}
+              </p>
+              {/* <div className="pad-ver">
                     <div className="btn-group">
                       <a
                         className="btn btn-sm btn-default btn-hover-success text-decoration-none"
@@ -307,18 +432,16 @@ const Comments = () => {
                       Comment
                     </a>
                   </div> */}
-                  <hr />
+              <hr />
 
-                  {/* <!-- Comments --> */}
-                  <div>
-                    <CommentReply
-                    />
+              {/* <!-- Comments --> */}
+              <div>
+                {/* <CommentReply
+                />
 
-                    <CommentReply
-                    />
+                <CommentReply
+                /> */}
 
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -327,6 +450,8 @@ const Comments = () => {
     </>
   )
 }
+
+
 
 
 const CommentReply = () => {

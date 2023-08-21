@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./components/js/AllCss";
 import SetRoute from "./components/Routes/SetRoute";
 // import { Provider } from "react-redux";
@@ -8,7 +8,7 @@ import SetRoute from "./components/Routes/SetRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-      <SetRoute />
-  </BrowserRouter>
+  <Router>
+    <SetRoute />
+  </Router>
 );

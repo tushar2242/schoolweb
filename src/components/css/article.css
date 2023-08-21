@@ -64,6 +64,15 @@
     cursor:pointer;
     color:#FF4848
 }
+
+.article-details{
+    width: 100%;
+    height: 360px;
+}
+
+
+
+
 @media only screen and (max-width:767px){
     .blog-headline-box{
         background-color:rgba(241, 241, 241, 0.918);

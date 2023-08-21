@@ -34,7 +34,7 @@ import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
 import noImg from '../../images/noImg.jpg';
 import showSchoolPreview from '../../images/banner/schoolDefault.jpg'
-import Review from "./Review";
+
 
 const customIcons = {
   1: <FrownOutlined />,
@@ -55,9 +55,11 @@ const userId = localStorage.getItem("userId");
 
 
 const Details = () => {
+
   const [dp, setDp] = useState("");
-
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [img, setImage] = useState([])
+  // const [review, setReview] = useState([])
 
 
   const schCard = useRef(null);
@@ -79,6 +81,9 @@ const Details = () => {
         if (id !== 'None') {
           const response = await axios.get(`${url}${endPoint}${id}`);
 
+          console.log(response.data.data[0])
+          // setReview(response.data.data[0].review)
+          setImage(response.data.data[0].allPostImages)
           if (!response.data.data[0].school.schoolImage) {
             setDp(showSchoolPreview);
           }
@@ -106,7 +111,9 @@ const Details = () => {
     };
 
     fetchData();
-  }, [id]);
+
+    setIsLoading(false)
+  }, [id, postId]);
 
 
 
@@ -114,6 +121,9 @@ const Details = () => {
 
   return (
     <>
+      {isLoading && <LoadingPage
+        msg='Loading'
+      />}
       <NavBar />
 
       <div className="study-box">
@@ -178,7 +188,11 @@ const Details = () => {
               </div>
               <div className="col-md-12 mt-4">
                 <div className="shadow-sm schoolcard-box">
-                  <BasicTabs des={card.school.schoolDescription} />
+                  <BasicTabs
+                    des={card.school.schoolDescription}
+                    gallery={img}
+                    // review={review}
+                  />
                 </div>
               </div>
             </div>
@@ -280,7 +294,7 @@ class Carddetails extends React.Component {
               </div>
             </div>
             <hr></hr>
-            <div className="button-box">
+            {/* <div className="button-box">
               <Button variant="contained" className="enquire-btn">
                 Enquire Now
               </Button>
@@ -288,7 +302,7 @@ class Carddetails extends React.Component {
               <Button variant="contained" className="compare-btn">
                 Compare
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </>
@@ -387,7 +401,7 @@ class BasicTabs extends Component {
 
   render() {
     const { value } = this.state;
-    const { des } = this.props;
+    const { des, gallery } = this.props;
 
     return (
       <Box>
@@ -399,7 +413,7 @@ class BasicTabs extends Component {
             aria-label="basic tabs example"
           >
             <Tab label="About" {...a11yProps(0)} />
-            <Tab label="Eligibility" {...a11yProps(1)} />
+            {/* <Tab label="Eligibility" {...a11yProps(1)} /> */}
             <Tab label="Facilities" {...a11yProps(2)} />
             <Tab label="Gallery" {...a11yProps(3)} />
             <Tab label="Reviews" {...a11yProps(4)} />
@@ -408,17 +422,21 @@ class BasicTabs extends Component {
         <TabPanel value={value} index={0}>
           <AboutCard des={des} />
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        {/* <TabPanel value={value} index={1}>
           Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
+        </TabPanel> */}
+        <TabPanel value={value} index={1}>
           <Facility />
         </TabPanel>
-        <TabPanel value={value} index={3}>
-          <GalleryCard />
+        <TabPanel value={value} index={2}>
+          <GalleryCard
+            gallery={gallery}
+          />
         </TabPanel>
-        <TabPanel value={value} index={4}>
-          <ReviewForm />
+        <TabPanel value={value} index={3}>
+          <ReviewForm
+            // review={review}
+          />
         </TabPanel>
       </Box>
     );
@@ -501,25 +519,39 @@ class Facility extends React.Component {
   }
 }
 
-const imgUrls = [
-  "https://source.unsplash.com/PC_lbSSxCZE/800x600",
-  "https://source.unsplash.com/lVmR1YaBGG4/800x600",
-  "https://source.unsplash.com/5KvPQc1Uklk/800x600",
-  "https://source.unsplash.com/GtYFwFrFbMA/800x600",
-  "https://source.unsplash.com/Igct8iZucFI/800x600",
-  "https://source.unsplash.com/M01DfkOqz7I/800x600",
-  "https://source.unsplash.com/MoI_cHNcSK8/800x600",
-  "https://source.unsplash.com/M0WbGFRTXqU/800x600",
-  "https://source.unsplash.com/s48nn4NtlZ4/800x600",
-  "https://source.unsplash.com/E4944K_4SvI/800x600",
-  "https://source.unsplash.com/F5Dxy9i8bxc/800x600",
-  "https://source.unsplash.com/iPum7Ket2jo/800x600",
-];
+
 
 class GalleryCard extends React.Component {
+
+
+  fetchImg() {
+    axios.get
+  }
+
+  componentDidMount() {
+    this.fetchImg()
+  }
+
+
+
+
   constructor(props) {
     super(props);
-    this.state = { currentIndex: null };
+    this.state = {
+      currentIndex: null,
+      imgUrls: [
+        "https://source.unsplash.com/PC_lbSSxCZE/800x600",
+        "https://source.unsplash.com/lVmR1YaBGG4/800x600",
+        "https://source.unsplash.com/5KvPQc1Uklk/800x600",
+
+      ]
+    };
+
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.fetchImg = this.fetchImg.bind(this)
+
+
+
     this.closeModal = this.closeModal.bind(this);
     this.findNext = this.findNext.bind(this);
     this.findPrev = this.findPrev.bind(this);
@@ -528,7 +560,7 @@ class GalleryCard extends React.Component {
   renderImageContent(src, index) {
     return (
       <div onClick={(e) => this.openModal(e, index)}>
-        <img src={src} alt="tg" />
+        <img src={url + src} alt="tg" />
       </div>
     );
   }
@@ -558,18 +590,23 @@ class GalleryCard extends React.Component {
     }));
   }
   render() {
+
+    const { imgUrls } = this.state
+
+    const { gallery } = this.props;
+
     return (
       <div className="gallery-container">
         <div className="gallery-grid">
-          {imgUrls.map(this.renderImageContent)}
+          {gallery.map(this.renderImageContent)}
         </div>
         <GalleryModal
           closeModal={this.closeModal}
           findPrev={this.findPrev}
           findNext={this.findNext}
           hasPrev={this.state.currentIndex > 0}
-          hasNext={this.state.currentIndex + 1 < imgUrls.length}
-          src={imgUrls[this.state.currentIndex]}
+          hasNext={this.state.currentIndex + 1 < gallery.length}
+          src={gallery[this.state.currentIndex]}
         />
       </div>
     );
@@ -641,6 +678,11 @@ class GalleryModal extends React.Component {
 }
 
 const ReviewForm = () => {
+
+
+  // const hitRate = 'rating/create?userId='
+
+  // console.log(review)
   const [star, setStar] = useState(3);
   const [ratingName, setRatingName] = useState("");
   const [ratingMail, setRatingMail] = useState("");
@@ -661,6 +703,10 @@ const ReviewForm = () => {
 
         console.log(res.data)
         alert(res.data.msg)
+        setStar(3)
+        setRatingName('')
+        setRatingMail('')
+        setRatingMsg('')
       }
       catch (err) {
         console.log(err)
@@ -753,13 +799,13 @@ const ReviewForm = () => {
             variant="contained"
             className="submit-btn"
             onClick={handleReviewSubmit}
-            style={{width:'50px !important'}}
+            style={{ width: '50px !important' }}
           >
             DROP YOUR REVIEW
           </Button>
         </div>
+        
 
-        <Review />
       </div>
     </>
   );
